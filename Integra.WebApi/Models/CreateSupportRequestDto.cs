@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using FC12.SupportExtensions.Models;
+using Integra.Domain;
 using Integra.Application.Common.Mappings;
 using Integra.Application.SupportRequests.Commands;
 

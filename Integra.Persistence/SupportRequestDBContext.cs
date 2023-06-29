@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Microsoft.EntityFrameworkCore;
-using FC12.SupportExtensions.Models;
+using Integra.Domain;
 using Integra.Application.Interfaces;
 using Integra.Persistence.EntityTypeConfigurations;
 using Microsoft.EntityFrameworkCore.Metadata;

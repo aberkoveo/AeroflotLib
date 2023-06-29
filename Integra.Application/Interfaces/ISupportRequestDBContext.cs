@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using FC12.SupportExtensions.Models;
+using Integra.Domain;
 
 namespace Integra.Application.Interfaces
 {

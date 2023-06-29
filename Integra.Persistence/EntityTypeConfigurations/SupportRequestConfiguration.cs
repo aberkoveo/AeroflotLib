@@ -1,4 +1,4 @@
-﻿using FC12.SupportExtensions.Models;
+﻿using Integra.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;

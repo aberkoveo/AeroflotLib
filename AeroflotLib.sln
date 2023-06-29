@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Integra.WebApi", "Integra.W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FC12", "FC12\FC12.csproj", "{9509DB40-80D5-4EFF-BD29-C9982669AD65}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integra.Domain", "Integra.Domain\Integra.Domain.csproj", "{148469A8-5D43-4A92-AB15-F532BFB0B61B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{9509DB40-80D5-4EFF-BD29-C9982669AD65}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9509DB40-80D5-4EFF-BD29-C9982669AD65}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9509DB40-80D5-4EFF-BD29-C9982669AD65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{148469A8-5D43-4A92-AB15-F532BFB0B61B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{148469A8-5D43-4A92-AB15-F532BFB0B61B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{148469A8-5D43-4A92-AB15-F532BFB0B61B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{148469A8-5D43-4A92-AB15-F532BFB0B61B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

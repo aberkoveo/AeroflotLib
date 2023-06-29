@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.Identity.Client;
-using FC12.SupportExtensions.Models;
+using Integra.Domain;
 
 namespace Integra.Application.SupportRequests.Commands
 {

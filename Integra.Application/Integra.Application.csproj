@@ -11,10 +11,11 @@
     <PackageReference Include="MediatR" Version="11.1.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.5" />
+    <PackageReference Include="Microsoft.Office.Interop.Outlook" Version="15.0.4797.1004" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\FC12Logger\FC12Logger\FC12.csproj" />
+    <ProjectReference Include="..\Integra.Domain\Integra.Domain.csproj" />
   </ItemGroup>
 
 </Project>

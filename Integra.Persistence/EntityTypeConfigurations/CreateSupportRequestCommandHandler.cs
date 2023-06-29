@@ -5,7 +5,7 @@ using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using MediatR;
-using FC12.SupportExtensions.Models;
+using Integra.Domain;
 using Integra.Application.Interfaces;
 
 namespace Integra.Application.SupportRequests.Commands
