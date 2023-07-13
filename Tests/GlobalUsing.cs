@@ -16,7 +16,8 @@ namespace Tests
             CC = "Евген",
             BatchId = "1",
             BatchName = "BatchName_TEST",
-            Priority = Priority.Urgent,
+            
+            RequestPriority = RequestPriority.Urgent,
             Comment = "Тестовое описание"
             
         };

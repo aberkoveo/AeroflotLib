@@ -4,7 +4,7 @@ using Integra.Application.Interfaces;
 
 namespace Integra.Application.SupportRequests.Commands;
 
-internal class CreateSupportRequestCommandHandle
+public class CreateSupportRequestCommandHandle
     : IRequestHandler<CreateSupportRequestCommand, int>
 {
     private readonly ISupportRequestDBContext _dbContext;
@@ -19,13 +19,13 @@ internal class CreateSupportRequestCommandHandle
             BatchId = request.BatchId,
             BatchOwner = request.BatchOwner,
             Comment = request.Comment,
+            Categories= request.Categories,
         };
 
-        supportRequest.AddCategories(request.Categories);
         await _dbContext.SupportRequests.AddAsync(supportRequest, cancellationToken);
         await _dbContext.SaveChangesAsync(cancellationToken);
 
-        return request.ID;
+        return supportRequest.ID;
     }
 
     public CreateSupportRequestCommandHandle(ISupportRequestDBContext dbContext)

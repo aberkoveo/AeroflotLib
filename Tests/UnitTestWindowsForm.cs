@@ -15,7 +15,7 @@ namespace Tests
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new SupportMessageForm(GlobalUsing.TestingRequest2, true));
+            Application.Run(new SupportMessageForm(GlobalUsing.TestingRequest2, null, true));
         }
 
         [TestMethod]

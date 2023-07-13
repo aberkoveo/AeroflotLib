@@ -90,7 +90,6 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -99,6 +98,12 @@
     <EmbeddedResource Include="SupportExtensions\SupportMessageForm.resx">
       <DependentUpon>SupportMessageForm.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Integra.Client\Integra.Client.csproj">
+      <Project>{f39516f8-faa0-467c-9660-83a3d29930b4}</Project>
+      <Name>Integra.Client</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

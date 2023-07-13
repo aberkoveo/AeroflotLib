@@ -1,27 +1,34 @@
-﻿using static System.String;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+using static System.String;
 
 namespace Integra.Domain;
 
 public class SupportRequest
 {
-    //[DatabaseGenerated(DatabaseGeneratedOption.None)]
     private readonly string _subject;
     private CustomList<string> _categories { get; set; } = new CustomList<string>();
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int ID { get; set; }
     public int SMID { get; set; }
     public readonly string CreationDate;
+    [NotMapped]
     public string Subject => $"{_subject} Приоритет: {(int)Priority}";
     public Priority Priority { get; set; }
+    [NotMapped]
     public string Recipient { get; set; }
 
+    [NotMapped]
     public string CC { get; set; }
 
-    //private AbbyyBatch Batch { get; set; }
     public string BatchId { get; set; }
+    [NotMapped]
     public string BatchName { get; set; }
+    
     public string BatchOwner { get; set; }
     public string Comment { get; set; }
-
+    [NotMapped]
     public bool IsValid => _categories.Any();
 
     public void AddCategory(string category)
@@ -39,7 +46,7 @@ public class SupportRequest
     {
         _categories.Remove(category);
     }
-
+    
     public string Categories
     {
         get { return Join(", ", _categories); }
@@ -64,12 +71,6 @@ public class CustomList<T> : List<T>
     }
 }
 
-public class AbbyyBatch
-{
-    public string BatchId { get; set; }
-    public string BatchName { get; set; }
-    public string BatchOwner { get; set; }
-}
 
 public enum Priority : ushort
 {

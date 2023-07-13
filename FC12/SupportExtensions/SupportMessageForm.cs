@@ -15,21 +15,25 @@ using Microsoft.Office.Interop.Outlook;
 using Newtonsoft.Json;
 using FC12.SupportExtensions.Outlook;
 using System.Runtime.CompilerServices;
+using Integra.Client;
+
 
 namespace FC12.SupportExtensions
 {
     public partial class SupportMessageForm : Form
     {
         private static SupportRequest Request { get; set; }
+        private static IntegraClient _integraClient;
         private readonly bool DebugState;
 
         
 
-        public SupportMessageForm(SupportRequest request, bool debug = false)
+        public SupportMessageForm(SupportRequest request, IntegraClient integraClient = null, bool debug = false)
         {
             Request = request;
             DebugState = debug;
-            this.CenterToScreen();
+            _integraClient = integraClient;
+            CenterToScreen();
             InitializeComponent();
         }
 
@@ -41,10 +45,13 @@ namespace FC12.SupportExtensions
 
         private void SendRun()
         {
+            
             OutlookHelper.CreateEmailSample(Request);
+            ExecuteIntegraRequest();
             this.Close();
         }
 
+        #region [Form Control Elements]
         private void SupportMessageForm_Load(object sender, EventArgs e)
         {
             BatchNameValueLabel.Text = Request.BatchName;
@@ -52,22 +59,22 @@ namespace FC12.SupportExtensions
 
         private void PriorityHighRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            if (PriorityHighRadioButton.Checked) Request.Priority = Priority.High;
+            if (PriorityHighRadioButton.Checked) Request.RequestPriority = RequestPriority.High;
         }
 
         private void PriorityLowRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            if (PriorityLowRadioButton.Checked) Request.Priority = Priority.Low;
+            if (PriorityLowRadioButton.Checked) Request.RequestPriority = RequestPriority.Low;
         }
 
         private void PriorityMediumRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            if (PriorityMediumRadioButton.Checked) Request.Priority = Priority.Medium;
+            if (PriorityMediumRadioButton.Checked) Request.RequestPriority = RequestPriority.Medium;
         }
 
         private void PriorityUrgentRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            if (PriorityUrgentRadioButton.Checked) Request.Priority = Priority.Urgent;
+            if (PriorityUrgentRadioButton.Checked) Request.RequestPriority = RequestPriority.Urgent;
         }
 
         private void CategoryLayOutCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -107,6 +114,7 @@ namespace FC12.SupportExtensions
             Request.Comment = CommentValueTextBox.Text;
         }
 
+        #endregion
         private void SendButton_Click(object sender, EventArgs e)
         {
             if (Request.IsValid())
@@ -128,6 +136,21 @@ namespace FC12.SupportExtensions
             {
                 SendRun(); 
             }
+        }
+
+        private static void ExecuteIntegraRequest()
+        {
+            CreateSupportRequestDto requestDto = new CreateSupportRequestDto()
+            {
+                BatchId = Request.BatchId,
+                BatchOwner = Request.BatchOwner,
+                Categories = Request.Categories,
+                Comment = Request.Comment,
+                Priority = (Priority)Request.RequestPriority,
+                Smid = Request.SMID
+            };
+
+            _integraClient.SupportRequestPOSTAsync(requestDto);
         }
     }
 }

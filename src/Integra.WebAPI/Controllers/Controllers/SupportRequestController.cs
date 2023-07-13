@@ -27,6 +27,6 @@ public class SupportRequestController : BaseController
         var command = _mapper.Map<CreateSupportRequestCommand>(createSupportRequestDto);
         var supportRequestId = await Mediator.Send(command);
         return Ok(supportRequestId);
-        return Ok(1);
+        
     }
 }

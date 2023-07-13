@@ -20,9 +20,9 @@ namespace FC12.SupportExtensions.Models
         public readonly string CreationDate;
         public string Subject
         {
-            get { return $"{_subject} Приоритет: {(int)Priority}" ; }
+            get { return $"{_subject} Приоритет: {(int)RequestPriority}" ; }
         } 
-        public Priority Priority { get; set; }
+        public RequestPriority RequestPriority { get; set; }
         public string Recipient { get; set; }
         public string CC { get; set; }
         //private AbbyyBatch Batch { get; set; }
@@ -91,7 +91,7 @@ namespace FC12.SupportExtensions.Models
     }
 
     
-    public enum Priority : ushort
+    public enum RequestPriority : ushort
     {
         Low = 0, 
         Medium = 1, 

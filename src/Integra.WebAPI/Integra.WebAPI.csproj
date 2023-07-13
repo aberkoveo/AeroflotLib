@@ -20,4 +20,10 @@
       <ProjectReference Include="..\Integra.Persistence\Integra.Persistence.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Update="appsettings.json">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
 </Project>

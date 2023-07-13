@@ -72,6 +72,10 @@
       <Project>{9509db40-80d5-4eff-bd29-c9982669ad65}</Project>
       <Name>FC12</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Integra.Client\Integra.Client.csproj">
+      <Project>{f39516f8-faa0-467c-9660-83a3d29930b4}</Project>
+      <Name>Integra.Client</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
