@@ -16,7 +16,7 @@ public class SupportRequestDBContext : DbContext, ISupportRequestDBContext
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
-        //builder.ApplyConfiguration(new SupportRequestConfiguration());
+        builder.ApplyConfiguration(new SupportRequestConfiguration());
         base.OnModelCreating(builder);
     }
 }

@@ -15,9 +15,10 @@ namespace AeroflotLib
 {
     public class ExportModule
     {
-        private readonly string ExportPathVar = "Export_pdf_path";
+        //private readonly string ExportPathVar = "Export_pdf_path";
+        //private readonly string ExportedPathParameter = "ExportedFilePath";
         private IExportImageSavingOptions ExportOptions { get; set; }
-        private IDocument _Document { get; set; }
+        private IDocument Document { get; set; }
         private IProcessingCallback Processing { get; set; }
         private string DefinitionName { get; set; }
         private string BatchNumber { get; set; }
@@ -29,12 +30,12 @@ namespace AeroflotLib
         public ExportModule(IDocument document, IProcessingCallback processing, IExportImageSavingOptions exportOptions)
         {
             this.ExportOptions = exportOptions;
-            this._Document = document;
+            this.Document = document;
             this.Processing = processing;
-            this.DefinitionName = this._Document.DefinitionName;
-            this.BatchNumber = this._Document.Batch.Id.ToString("0000");
-            this.DocumentNumber = this._Document.Id.PadLeft(8, '0');
-            this.ExportRootPath = this._Document.Batch.Project.EnvironmentVariables.Get(this.ExportPathVar);
+            this.DefinitionName = this.Document.DefinitionName;
+            this.BatchNumber = this.Document.Batch.Id.ToString("0000");
+            this.DocumentNumber = this.Document.Id.PadLeft(8, '0');
+            this.ExportRootPath = this.Document.Batch.Project.EnvironmentVariables.Get(ProjectEnvironmentProperties.ExportPath);
             this.Logger = new FC12Logger(document, processing);
         }
         
@@ -58,7 +59,7 @@ namespace AeroflotLib
                     case "АктВыполненныхРабот":
                         // Добавляем единичку к номеру второго корректировочного документа
                         // (когда есть и уменьшение, и увеличение)
-                        if (_Document.Field("АктВыполненныхРабот\\DocType").Text == "05")
+                        if (Document.Field("АктВыполненныхРабот\\DocType").Text == "05")
                         {
                             Add1ToDocumentNumber();
                         }
@@ -70,11 +71,11 @@ namespace AeroflotLib
                         filePath = folderPath + @"\VATInvoice" + DocumentNumber + ".pdf";
 
                         // корректировочная
-                        if (_Document.Field("Счет-фактура\\OriginalInvoiceNumber").IsVisible == true)
+                        if (Document.Field("Счет-фактура\\OriginalInvoiceNumber").IsVisible == true)
                         {
                             // Добавляем единичку к номеру второго корректировочного документа
                             // (когда есть и уменьшение, и увеличение)
-                            if (_Document.Field("Счет-фактура\\DocType").Text == "05")
+                            if (Document.Field("Счет-фактура\\DocType").Text == "05")
                             {
                                 Add1ToDocumentNumber();
                             }
@@ -82,7 +83,7 @@ namespace AeroflotLib
                         }
 
                         // исправительная
-                        if (_Document.Field("Счет-фактура\\CorrectionNumber").IsVisible == true)
+                        if (Document.Field("Счет-фактура\\CorrectionNumber").IsVisible == true)
                         {
                             filePath = folderPath + @"\VATInvoiceChange" + DocumentNumber + ".pdf";
                         }
@@ -95,8 +96,8 @@ namespace AeroflotLib
                         break;
 
                     case "УПД":
-                        string statusUPD = _Document.Field("УПД\\Status").Text;
-                        if (_Document.Field("УПД\\OriginalInvoiceNumber").IsVisible == false)
+                        string statusUPD = Document.Field("УПД\\Status").Text;
+                        if (Document.Field("УПД\\OriginalInvoiceNumber").IsVisible == false)
                         {
                             // УПД статус 1/2
                             filePath = folderPath + $@"\UPD{statusUPD}" + DocumentNumber + ".pdf";
@@ -108,7 +109,7 @@ namespace AeroflotLib
                         }
 
                         // Добавляем единичку к номеру второго корректировочного документа (когда есть и уменьшение, и увеличение)
-                        if (_Document.Field("УПД\\DocType").Text == "05")
+                        if (Document.Field("УПД\\DocType").Text == "05")
                         {
                             Add1ToDocumentNumber();
                             // УКД статус 1 или 2
@@ -135,11 +136,11 @@ namespace AeroflotLib
             }
 
             //Экспорт актов по форме С  ===================================================================
-            if (_Document.Properties.Get("Тип комплекта") == "КЗУ Летные (Форма С)")
+            if (Document.Properties.Get("Тип комплекта") == "КЗУ Летные (Форма С)")
             {
                 string folderPath = CreateSetFolder(ExportRootPath, BatchNumber + "_" + DocumentNumber);
 
-                foreach (IPage page in _Document.Pages)
+                foreach (IPage page in Document.Pages)
                 {
                     if (page.SectionName != DocumentSections.ActFormC) page.ExcludedFromDocumentImage = true;
                 }
@@ -147,7 +148,7 @@ namespace AeroflotLib
 
                 ExportPDF(filePath);
 
-                foreach (IPage page in _Document.Pages)
+                foreach (IPage page in Document.Pages)
                 {
                     page.ExcludedFromDocumentImage = false;
                 }
@@ -155,11 +156,11 @@ namespace AeroflotLib
 
             //Экспорт реестров  ===========================================================================
             //Реестр ЛУ
-            if (_Document.Properties.Get("Тип комплекта") == "КЗУ Летные (Реестр ЛУ Пасс)")
+            if (Document.Properties.Get("Тип комплекта") == "КЗУ Летные (Реестр ЛУ Пасс)")
             {
                 string folderPath = CreateSetFolder(ExportRootPath, BatchNumber + "_" + DocumentNumber);
 
-                foreach (IPage page in _Document.Pages)
+                foreach (IPage page in Document.Pages)
                 {
                     if (page.SectionName != DocumentSections.ReestrLU) page.ExcludedFromDocumentImage = true;
                 }
@@ -167,7 +168,7 @@ namespace AeroflotLib
 
                 ExportPDF(filePath);
 
-                foreach (IPage page in _Document.Pages)
+                foreach (IPage page in Document.Pages)
                 {
                     page.ExcludedFromDocumentImage = false;
                 }
@@ -179,11 +180,11 @@ namespace AeroflotLib
                                   "КЗУ Летные (Transportstyrelsen)", "КЗУ Летные (ICTS)",
                                   "КЗУ Летные (LMC SERVICES B.V.)", "КЗУ Летные (Amsterdam Airport Schiphol)" };
 
-            if (setTypes.Contains(_Document.Properties.Get("Тип комплекта")))
+            if (setTypes.Contains(Document.Properties.Get("Тип комплекта")))
             {
                 string folderPath = CreateSetFolder(ExportRootPath, BatchNumber + "_" + DocumentNumber);
 
-                foreach (IPage page in _Document.Pages)
+                foreach (IPage page in Document.Pages)
                 {
                     if (!DocumentSections.ReestrTypes.Contains(page.SectionName)) page.ExcludedFromDocumentImage = true;
                 }
@@ -192,22 +193,22 @@ namespace AeroflotLib
 
                 ExportPDF(filePath);
 
-                foreach (IPage page in _Document.Pages)
+                foreach (IPage page in Document.Pages)
                 {
                     page.ExcludedFromDocumentImage = false;
                 }
             }
 
             //Экспорт приложений  ============================================================================
-            if (_Document.DefinitionName == "Постоплата РФ" || _Document.DefinitionName == "Постоплата Зарубеж" ||
-                _Document.DefinitionName == "Аванс РФ" || _Document.DefinitionName == "Аванс Зарубежный")
+            if (Document.DefinitionName == "Постоплата РФ" || Document.DefinitionName == "Постоплата Зарубеж" ||
+                Document.DefinitionName == "Аванс РФ" || Document.DefinitionName == "Аванс Зарубежный")
             {
                 string folderPath = CreateSetFolder(ExportRootPath, BatchNumber + "_" + DocumentNumber);
 
                 //Проверка на наличие приложений
-                if (!(_Document.Pages is null))
+                if (!(Document.Pages is null))
                 {
-                    foreach (IPage page in _Document.Pages)
+                    foreach (IPage page in Document.Pages)
                     {
                         if (DocumentSections.GetAllSections().Contains(page.SectionName))
                         {
@@ -218,7 +219,7 @@ namespace AeroflotLib
                     filePath = folderPath + @"\Attachment" + ".pdf";
                     ExportPDF(filePath);
 
-                    foreach (IPage page in _Document.Pages)
+                    foreach (IPage page in Document.Pages)
                     {
                         page.ExcludedFromDocumentImage = false;
                     }
@@ -231,7 +232,7 @@ namespace AeroflotLib
         {
             try
             {
-                _Document.SaveAs(pdfFilePath, ExportOptions);
+                Document.SaveAs(pdfFilePath, ExportOptions);
                 Logger.logger.Info( $"{DefinitionName} экспортирован успешно в {pdfFilePath}");
             }
             catch (Exception e)
@@ -252,13 +253,13 @@ namespace AeroflotLib
         //номер комплекта
         private string GetSetNumber()
         {
-            return this._Document.AsBatchItem.Parent.AsDocument.Id.PadLeft(8, '0');
+            return this.Document.AsBatchItem.Parent.AsDocument.Id.PadLeft(8, '0');
         }
 
         // Добавляем единичку к номеру второго корректировочного документа (когда есть и уменьшение, и увеличение)
         private void Add1ToDocumentNumber()
         {
-            this.DocumentNumber = ("1" + _Document.Id).PadLeft(8, '0');
+            this.DocumentNumber = ("1" + Document.Id).PadLeft(8, '0');
         }
     }
 }

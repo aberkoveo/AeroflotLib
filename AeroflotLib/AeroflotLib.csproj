@@ -49,6 +49,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Processing\ExportSap\Builders\Parameters\SapRequestParameters.cs" />
+    <Compile Include="Processing\ExportSap\Builders\RequestBodyBuilder.cs" />
+    <Compile Include="Processing\ExportSap\Builders\RequestBuilder.cs" />
+    <Compile Include="Processing\ExportSap\Builders\Parameters\RequestParameters.cs" />
+    <Compile Include="Processing\ExportSap\RequestBody\ZFMABBYYFILESAVE.cs" />
+    <Compile Include="Processing\ExportSap\RequestSender.cs" />
+    <Compile Include="Processing\ExportSap\SapExportModule.cs" />
+    <Compile Include="Processing\BatchTypes\Postoplata\ExportStageHandler.cs" />
     <Compile Include="Processing\Export\DocumentSections.cs" />
     <Compile Include="Processing\Export\ExportModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -63,6 +71,11 @@
       <Project>{f39516f8-faa0-467c-9660-83a3d29930b4}</Project>
       <Name>Integra.Client</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Processing\BatchTypes\Avans\" />
+    <Folder Include="Processing\BatchTypes\DKZ_Z1\" />
+    <Folder Include="Processing\BatchTypes\Nestandart\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -10,18 +10,15 @@ namespace FC12
     public class FC12Logger
     {
 
-        public Logger logger;
-
-        private readonly string rootLogPathEnvVar = "rootLogPath";
-
+        public  Logger logger;
+        
         private LogFactory logFactory;
-
-        public FC12Logger(Object fcobject, IProcessingCallback processing)
+        private readonly string rootLogPathEnvVar;
+        public FC12Logger(Object fcobject, IProcessingCallback processing, string logPath = "rootLogPath")
         {
-            
-                CreateLogFactory(fcobject);
-                this.logger = this.logFactory.GetCurrentClassLogger();
-            
+            rootLogPathEnvVar = logPath;
+            CreateLogFactory(fcobject);
+            this.logger = this.logFactory.GetCurrentClassLogger();
         }
 
 
@@ -43,45 +40,53 @@ namespace FC12
             string rootLogPath;
             string dateNow = DateTime.Now.ToString("dd_MM_yyyy");
 
+            target.Name = "FC12LogFile";
+            target.CreateDirs = true;
+            target.Encoding = Encoding.UTF8;
+            target.KeepFileOpen = false;
+            target.ConcurrentWrites = true;
+            target.ConcurrentWriteAttemptDelay = 20;
+            target.ConcurrentWriteAttempts = 5;
+
             switch (fcobject)
             {
                 case IBatch batch:
                     rootLogPath = batch.Project.EnvironmentVariables.Get(this.rootLogPathEnvVar);
-                    target.Name = "FC12LogFile";
+                    //target.Name = "FC12LogFile";
                     target.FileName = rootLogPath + "\\" + "${hostname}\\" + batch.StageInfo.StageName + "_" + dateNow + ".log";
                     target.Layout = "${longdate} | ${level:uppercase=true} | batchId:" + batch.Id + " | ${message} ${exception:format=tostring}";
-                    target.CreateDirs = true;
-                    target.Encoding = Encoding.UTF8;
-                    target.KeepFileOpen = false;
-                    target.ConcurrentWrites = true;
-                    target.ConcurrentWriteAttemptDelay = 20;
-                    target.ConcurrentWriteAttempts = 5;
+                    //target.CreateDirs = true;
+                    //target.Encoding = Encoding.UTF8;
+                    //target.KeepFileOpen = false;
+                    //target.ConcurrentWrites = true;
+                    //target.ConcurrentWriteAttemptDelay = 20;
+                    //target.ConcurrentWriteAttempts = 5;
                     break;
 
                 case IDocument document:
                     rootLogPath = document.Batch.Project.EnvironmentVariables.Get(this.rootLogPathEnvVar);
-                    target.Name = "FC12LogFile";
+                    //target.Name = "FC12LogFile";
                     target.FileName = rootLogPath + "\\" + "${hostname}\\" + document.StageInfo.StageName + "_" + dateNow + ".log";
                     target.Layout = "${longdate} | ${level:uppercase=true} | " + "batchId:" + document.Batch.Id + " | docId:" + document.Id + " | ${message} ${exception:format=tostring}";
-                    target.CreateDirs = true;
-                    target.Encoding = Encoding.UTF8;
-                    target.KeepFileOpen = false;
-                    target.ConcurrentWrites = true;
-                    target.ConcurrentWriteAttemptDelay = 20;
-                    target.ConcurrentWriteAttempts = 5;
+                    //target.CreateDirs = true;
+                    //target.Encoding = Encoding.UTF8;
+                    //target.KeepFileOpen = false;
+                    //target.ConcurrentWrites = true;
+                    //target.ConcurrentWriteAttemptDelay = 20;
+                    //target.ConcurrentWriteAttempts = 5;
                     break;
 
                 case IRuleContext context:
                     rootLogPath = context.Document.Batch.Project.EnvironmentVariables.Get(this.rootLogPathEnvVar);
-                    target.Name = "FC12LogFile";
+                    //target.Name = "FC12LogFile";
                     target.FileName = rootLogPath + "\\" + "${hostname}\\" + context.Document.StageInfo.StageName + "_" + dateNow + ".log";
                     target.Layout = "${longdate} | ${level:uppercase=true} | " + "batchId:" + context.Document.Batch.Id + " | docId:" + context.Document.Id + " | ${message} ${exception:format=tostring}";
-                    target.CreateDirs = true;
-                    target.Encoding = Encoding.UTF8;
-                    target.KeepFileOpen = false;
-                    target.ConcurrentWrites = true;
-                    target.ConcurrentWriteAttemptDelay = 20;
-                    target.ConcurrentWriteAttempts = 5;
+                    //target.CreateDirs = true;
+                    //target.Encoding = Encoding.UTF8;
+                    //target.KeepFileOpen = false;
+                    //target.ConcurrentWrites = true;
+                    //target.ConcurrentWriteAttemptDelay = 20;
+                    //target.ConcurrentWriteAttempts = 5;
                     break;
 
                 default:

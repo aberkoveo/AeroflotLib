@@ -28,7 +28,7 @@ try
     builder.Services.AddApplication();
     builder.Services.AddPersistence(builder.Configuration);
     builder.Services.AddControllers();
-    // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+    
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
 
@@ -51,9 +51,7 @@ try
     //app.UseHttpsRedirection();
 
     app.UseAuthorization();
-
     app.MapControllers();
-
     app.Run();
 }
 catch (Exception exception)

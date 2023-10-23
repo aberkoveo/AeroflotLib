@@ -26,8 +26,6 @@ namespace FC12.SupportExtensions
         private static IntegraClient _integraClient;
         private readonly bool DebugState;
 
-        
-
         public SupportMessageForm(SupportRequest request, IntegraClient integraClient = null, bool debug = false)
         {
             Request = request;
