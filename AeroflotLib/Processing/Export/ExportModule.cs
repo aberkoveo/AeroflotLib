@@ -10,6 +10,12 @@ using System.Xml.Linq;
 using ABBYY.FlexiCapture;
 using Microsoft.SqlServer.Server;
 using FC12;
+using AeroflotLib.Processing.BatchTypes;
+using System.Collections;
+//using System.Collections.Generic;
+using System.Text.Json;
+using System.Windows.Forms.VisualStyles;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace AeroflotLib
 {
@@ -234,6 +240,7 @@ namespace AeroflotLib
             {
                 Document.SaveAs(pdfFilePath, ExportOptions);
                 Logger.logger.Info( $"{DefinitionName} экспортирован успешно в {pdfFilePath}");
+                //WriteExportedDocumentToBatch(pdfFilePath);
             }
             catch (Exception e)
             {
@@ -261,5 +268,18 @@ namespace AeroflotLib
         {
             this.DocumentNumber = ("1" + Document.Id).PadLeft(8, '0');
         }
+
+
+        /*
+        private void WriteExportedDocumentToBatch(string filePath)
+        {
+            string fileName = Path.GetFileName(filePath);
+            if (!Document.Properties.Has(fileName))
+            {
+                Document.Properties.Set(fileName, "");
+            }
+        }*/
+
+
     }
 }

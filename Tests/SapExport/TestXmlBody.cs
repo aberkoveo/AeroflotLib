@@ -58,8 +58,8 @@ namespace Tests.SapExport
             req[2] = " 2020";    //I_OBJKEY
             req[3] = "BUS2081";    //I_OBJTYPE
 
-            string body = RequestBodyBuilder.BuildBody(req);
-            Console.WriteLine(body);
+            //string body = RequestBodyBuilder.BuildBody(req);
+            //Console.WriteLine(body);
         }
     }
 }

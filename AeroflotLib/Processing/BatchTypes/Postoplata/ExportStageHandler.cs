@@ -16,10 +16,12 @@ namespace AeroflotLib.Processing.ExportSap
     {
         private readonly ILogger logger;
         private IDocument Document { get; set; }
+        private readonly SapExportModule SapExportModule;
         public ExportStageHandler(IDocument document, IProcessingCallback processing)
         {
             Document = document;
             logger = new FC12Logger(document, processing).logger;
+            SapExportModule = new SapExportModule(document, processing);
         }
 
         public void Handle()
@@ -27,9 +29,8 @@ namespace AeroflotLib.Processing.ExportSap
 
 
 
-
             //string obj_key = "";     // номер ДКЗ + год (регистрационные параметры комплекта)
-            string batchnum = "";   // номер пакета
+            string batchnum = "";   // номер пакетаы
 
             //string doctype = "";    // тип документа
             //string objtype = "";    // BUS2081 или SCASE 
@@ -100,6 +101,7 @@ namespace AeroflotLib.Processing.ExportSap
                     //=====================  
 
                     //Send_File obj = new Send_File();
+                    
 
                     Dictionary<string, string> scans = new Dictionary<string, string>();
 
@@ -155,8 +157,10 @@ namespace AeroflotLib.Processing.ExportSap
                                     req[2] = objkey;
                                     req[3] = "BUS2081";
 
-                                    //err_mes = obj.InvokeService(req);
-
+                                    
+                                    SapExportModule.ExportDocument(req);
+                                    /*
+                                    err_mes = obj.InvokeService(req);
                                     if (err_mes != "Save OK")
                                     {
                                         //Processing.ReportWarning("Ошибка экспорта C - " + err_mes);
@@ -168,7 +172,7 @@ namespace AeroflotLib.Processing.ExportSap
                                     {
                                         //IBS-logging
                                         logger.Info(err_mes);
-                                    }
+                                    }*/
                                 }
                             }
 
@@ -188,8 +192,10 @@ namespace AeroflotLib.Processing.ExportSap
                                 req[2] = ext_key;
                                 req[3] = "SCASE";
 
-                                //err_mes = obj.InvokeService(req);
-
+                                
+                                SapExportModule.ExportDocument(req);
+                                /*
+                                err_mes = obj.InvokeService(req);
                                 if (err_mes != "Save OK")
                                 {
                                     //Processing.ReportWarning("Ошибка экспорта - " + err_mes);
@@ -201,7 +207,7 @@ namespace AeroflotLib.Processing.ExportSap
                                 {
                                     //IBS-logging
                                     logger.Info(err_mes);
-                                }
+                                }*/
 
                                 // Прикладываем счета ко всем ДКЗ
                                 if (filename.Contains("Foreign_invoice") == false)    // не для инвойсов
@@ -221,7 +227,10 @@ namespace AeroflotLib.Processing.ExportSap
                                             req[2] = objkey_acc;
                                             req[3] = "BUS2081";
 
-                                            //err_mes = obj.InvokeService(req);
+
+                                            SapExportModule.ExportDocument(req);
+                                            /*
+                                            err_mes = obj.InvokeService(req);
                                             if (err_mes != "Save OK")
                                             {
                                                 //Processing.ReportWarning("Ошибка экспорта - " + err_mes);
@@ -233,7 +242,7 @@ namespace AeroflotLib.Processing.ExportSap
                                             {
                                                 //IBS-logging
                                                 logger.Info(err_mes);
-                                            }
+                                            }*/
                                         }
 
                                         DKZ_list.Add(dkz_number_acc);
@@ -244,14 +253,14 @@ namespace AeroflotLib.Processing.ExportSap
                     }
 
                     DKZ_list_general.Add(dkz_number);
-
+                    /*
                     if (err == 0)
                         Document.Properties.Set("Отправлено", "X");
                     else
                     {
                         //Processing.ReportError("Не все документы были прикреплены к документу в SAP ERP");
                         logger.Error("Не все документы были прикреплены к документу в SAP ERP");
-                    }
+                    }*/
                 }
             }
         }

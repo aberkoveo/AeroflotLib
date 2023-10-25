@@ -11,8 +11,14 @@ namespace FC12
     {
         public static string GetEnvironmentVariable(string variableName, IProject project)
         {
-            try { return project.EnvironmentVariables.Get(variableName); }
-            catch (System.Exception e) { throw new System.Exception(e.Message + "\n" + e.StackTrace); }
+            if (project.EnvironmentVariables.Has(variableName))
+            {
+                return project.EnvironmentVariables.Get(variableName);
+            }
+            else
+            {
+                throw new Exception($"Project environment variable {variableName} is not defined");
+            }
         }
     }
 }

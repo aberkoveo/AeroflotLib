@@ -14,7 +14,7 @@ namespace AeroflotLib.Processing.ExportSap.Builders
 {
     public static class RequestBodyBuilder
     {
-        public static XmlDocument BuildBody(string[] parameters)
+        public static string BuildBody(string[] parameters)
         {
             var settings = new XmlWriterSettings
             {
@@ -33,10 +33,10 @@ namespace AeroflotLib.Processing.ExportSap.Builders
             Envelope xml = BuildEnvelope(parameters);
             serializer.Serialize(xmlWriter, xml, myNamespaces);
 
-            XmlDocument xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml(stringwriter.ToString());
+            //XmlDocument xmlDocument = new XmlDocument();
+            //xmlDocument.LoadXml(stringwriter.ToString());
 
-            return xmlDocument;
+            return stringwriter.ToString();
         }
 
         private static Envelope BuildEnvelope(string[] parameters)

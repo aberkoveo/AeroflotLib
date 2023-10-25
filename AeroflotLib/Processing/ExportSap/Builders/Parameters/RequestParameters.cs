@@ -9,20 +9,23 @@ namespace AeroflotLib.Processing.ExportSap.Factories.Parameters
 {
     public class RequestParameters
     {
-        public WebHeaderCollection Headers { get; set; }
+        public WebHeaderCollection Headers { get; set; } = new WebHeaderCollection();
         public string ContentType { get; set; }
         public string Accept { get; set; }
         public string Method { get; set; }
-        public Credentials SapCredentials { internal get; set; }
-        public string SapEndPoint 
+        public string SapLogin { internal get; set; }
+        public string SapPassword { internal  get; set; }
+
+        private string sapEndpoint;
+        public string SapEndpoint 
         { 
             get
             {
-                return SapEndPoint + new Guid();
+                return sapEndpoint + new Guid();
             }
             set
             {
-                SapEndPoint = value;
+                sapEndpoint = value;
             } 
         }
 
@@ -30,11 +33,6 @@ namespace AeroflotLib.Processing.ExportSap.Factories.Parameters
     }
 
 
-    public class Credentials
-    {
-        public string Login { get; set; }
-        public string Password { get; set; }
-    }
 
     
 }

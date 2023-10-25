@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FC12;
+using System.Net;
+
 
 namespace AeroflotLib.Processing.ExportSap.Builders.Parameters
 {
@@ -12,19 +15,25 @@ namespace AeroflotLib.Processing.ExportSap.Builders.Parameters
     {
         public static SapRequestParameters BuildSapRequestParameters(IDocument document)
         {
-            
 
+            IProject project = document.Batch.Project;
+            string sapEndpoint = Utilities.GetEnvironmentVariable(ProjectEnvironmentProperties.SapEndpoint, project);
+            string sapLogin = Utilities.GetEnvironmentVariable(ProjectEnvironmentProperties.SapLogin, project);
+            string sapPassword = Utilities.GetEnvironmentVariable(ProjectEnvironmentProperties.SapPassword, project);
 
-            return new SapRequestParameters
+            SapRequestParameters parameters = new SapRequestParameters
             {
-                SapEndPoint = document.Properties.Get(ProjectEnvironmentProperties.SapEnpoint),
-                SapCredentials = new Credentials
-                {
-                    Login = document.Properties.Get(ProjectEnvironmentProperties.SapLogin),
-                    Password = document.Properties.Get(ProjectEnvironmentProperties.SapPassword)
-                }
-
+                SapEndpoint = sapEndpoint,
+                SapLogin = sapLogin,
+                SapPassword = sapPassword
             };
+
+            parameters.AddAuthHeaders();
+
+
+            return parameters;
+
+
         }
     }
 }

@@ -8,15 +8,12 @@ namespace AeroflotLib
 {
     public static class ProjectEnvironmentProperties
     {
-        public static string SapEnpoint = "SapEnpoint";
+        public static string SapEndpoint = "SapEndpoint";
 
         public static string SapLogin = "SapLogin";
 
         public static string SapPassword = "SapPassword";
 
         public static string ExportPath = "Export_pdf_path";
-
-
-
     }
 }

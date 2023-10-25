@@ -13,7 +13,7 @@ namespace AeroflotLib.Processing.ExportSap.Factories.Parameters
     {
         public static HttpWebRequest CreateSapRequest(SapRequestParameters parameters)
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(parameters.SapEndPoint);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(parameters.SapEndpoint);
             request.Headers = parameters.Headers;
             request.Method = parameters.Method;    
             request.Accept = parameters.Accept;
