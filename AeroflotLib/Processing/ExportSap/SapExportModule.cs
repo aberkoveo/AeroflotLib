@@ -37,6 +37,8 @@ namespace AeroflotLib.Processing.ExportSap
             _processing.ReportMessage("Sap request parameters created");
 
             string requestBody = RequestBodyBuilder.BuildBody(bodyParameters);
+            //_processing.ReportMessage(requestBody);
+
             XmlDocument xmlBody = new XmlDocument();
             xmlBody.LoadXml(requestBody);
             _processing.ReportMessage("Sap request body created");

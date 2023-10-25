@@ -50,6 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Processing\BatchTypes\Avans\ExportStageHandler.cs" />
+    <Compile Include="Processing\BatchTypes\DKZ_Z1\ExportStageHandler.cs" />
+    <Compile Include="Processing\BatchTypes\Nestandart\ExportStageHandler.cs" />
     <Compile Include="Processing\BatchTypes\RegistrationProperties.cs" />
     <Compile Include="Processing\ExportSap\Builders\Parameters\SapRequestParameters.cs" />
     <Compile Include="Processing\ExportSap\Builders\Parameters\SapRequestParametersBuilder.cs" />
@@ -75,10 +78,6 @@
       <Name>Integra.Client</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Processing\BatchTypes\Avans\" />
-    <Folder Include="Processing\BatchTypes\DKZ_Z1\" />
-    <Folder Include="Processing\BatchTypes\Nestandart\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

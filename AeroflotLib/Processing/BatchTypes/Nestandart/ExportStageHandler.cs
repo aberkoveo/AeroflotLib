@@ -1,4 +1,6 @@
 ﻿using ABBYY.FlexiCapture;
+using AeroflotLib.Processing.ExportSap;
+using FC12;
 using NLog;
 using System;
 using System.Collections.Generic;
@@ -6,33 +8,27 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Linq;
-using FC12;
-using AeroflotLib.Processing.ExportSap;
 
-namespace AeroflotLib.Processing.BatchTypes.Postoplata
+namespace AeroflotLib.Processing.BatchTypes.Nestandart
 {
     public class ExportStageHandler
     {
-        private readonly ILogger _logger;
+        private readonly ILogger logger;
         private IDocument Document { get; set; }
         private readonly SapExportModule SapExportModule;
-        private readonly IProcessingCallback _processing;
         public ExportStageHandler(IDocument document, IProcessingCallback processing)
         {
             Document = document;
-            _processing = processing;
-            _logger = new FC12Logger(document, processing).logger;
+            logger = new FC12Logger(document, processing).logger;
             SapExportModule = new SapExportModule(document, processing);
         }
 
         public void Handle()
         {
-
             
 
             //string obj_key = "";     // номер ДКЗ + год (регистрационные параметры комплекта)
-            string batchnum = "";   // номер пакетаы
+            string batchnum = "";   // номер пакета
 
             //string doctype = "";    // тип документа
             //string objtype = "";    // BUS2081 или SCASE 
@@ -41,10 +37,8 @@ namespace AeroflotLib.Processing.BatchTypes.Postoplata
             string docnum = "";    // Номер документа (акта, СФ, счета и тд)
 
             int err = 0;    // переменная для проверки успешного экспорта документов   
-            if (Document.Properties.Get("Отправлено") != "X" && (Document.DefinitionName == "Постоплата РФ" || Document.DefinitionName == "Постоплата Зарубеж"))
+            if (Document.Properties.Get("Отправлено") != "X" && Document.DefinitionName == "Постоплата РФ")
             {
-
-                _processing.ReportMessage($"Комплект {Document.Id} будет экспортирован.");
                 // Определение номера пакета
                 batchnum = Document.Batch.Id.ToString();
                 while (batchnum.Length < 4)
@@ -90,7 +84,6 @@ namespace AeroflotLib.Processing.BatchTypes.Postoplata
                     }
 
 
-
                     string[] req = new string[4];
                     string fullpath = Document.Batch.Project.EnvironmentVariables.Get("Export_path") + batchnum + "_" + setnum;
                     string[] filesname = Directory.GetFiles(fullpath);
@@ -105,7 +98,6 @@ namespace AeroflotLib.Processing.BatchTypes.Postoplata
                     //=====================  
 
                     //Send_File obj = new Send_File();
-                    
 
                     Dictionary<string, string> scans = new Dictionary<string, string>();
 
@@ -161,20 +153,16 @@ namespace AeroflotLib.Processing.BatchTypes.Postoplata
                                     req[2] = objkey;
                                     req[3] = "BUS2081";
 
-                                    
                                     SapExportModule.ExportDocument(req);
                                     /*
-                                    err_mes = obj.InvokeService(req);
                                     if (err_mes != "Save OK")
                                     {
-                                        //Processing.ReportWarning("Ошибка экспорта C - " + err_mes);
-                                        //IBS-logging
-                                        logger.Error(err_mes);
+                                        logger.Error("err_mes");
+                                        Processing.ReportWarning("Ошибка экспорта C - " + err_mes);
                                         err++;
                                     }
                                     else
                                     {
-                                        //IBS-logging
                                         logger.Info(err_mes);
                                     }*/
                                 }
@@ -196,25 +184,21 @@ namespace AeroflotLib.Processing.BatchTypes.Postoplata
                                 req[2] = ext_key;
                                 req[3] = "SCASE";
 
-                                
                                 SapExportModule.ExportDocument(req);
-                                /*
-                                err_mes = obj.InvokeService(req);
-                                if (err_mes != "Save OK")
-                                {
-                                    //Processing.ReportWarning("Ошибка экспорта - " + err_mes);
-                                    //IBS-logging
-                                    logger.Error(err_mes);
-                                    err++;
-                                }
-                                else
-                                {
-                                    //IBS-logging
-                                    logger.Info(err_mes);
-                                }*/
+                                //err_mes = obj.InvokeService(req)
+                                //if (err_mes != "Save OK")
+                                //{
+                                //    logger.Error("err_mes");
+                                //    Processing.ReportWarning("Ошибка экспорта - " + err_mes);
+                                //    err++;
+                                //}
+                                //else
+                                //{
+                                //    logger.Info(err_mes);
+                                //}
 
                                 // Прикладываем счета ко всем ДКЗ
-                                if (filename.Contains("Foreign_invoice") == false)    // не для инвойсов
+                                if (filename.Contains("Foreign_invoice") == false && !doc_num.Contains("I"))    // не для инвойсов
                                 {
                                     // Создаем список ДКЗ (чтобы исключить дубли)
                                     List<string> DKZ_list = new List<string> { };
@@ -233,20 +217,17 @@ namespace AeroflotLib.Processing.BatchTypes.Postoplata
 
 
                                             SapExportModule.ExportDocument(req);
-                                            /*
-                                            err_mes = obj.InvokeService(req);
-                                            if (err_mes != "Save OK")
-                                            {
-                                                //Processing.ReportWarning("Ошибка экспорта - " + err_mes);
-                                                //IBS-logging
-                                                logger.Error(err_mes);
-                                                err++;
-                                            }
-                                            else
-                                            {
-                                                //IBS-logging
-                                                logger.Info(err_mes);
-                                            }*/
+                                            //err_mes = obj.InvokeService(req);
+                                            //if (err_mes != "Save OK")
+                                            //{
+                                            //    logger.Error("err_mes");
+                                            //    Processing.ReportWarning("Ошибка экспорта - " + err_mes);
+                                            //    err++;
+                                            //}
+                                            //else
+                                            //{
+                                            //    logger.Info(err_mes);
+                                            //}
                                         }
 
                                         DKZ_list.Add(dkz_number_acc);
@@ -256,17 +237,17 @@ namespace AeroflotLib.Processing.BatchTypes.Postoplata
                         }
                     }
 
+
+
+
                     DKZ_list_general.Add(dkz_number);
                     Document.Properties.Set("Отправлено", "X");
-                    /*
-                    if (err == 0)
-                        Document.Properties.Set("Отправлено", "X");
-                    else
-                    {
-                        //Processing.ReportError("Не все документы были прикреплены к документу в SAP ERP");
-                        logger.Error("Не все документы были прикреплены к документу в SAP ERP");
-                    }*/
+                    //if (err == 0)
+                    //    Document.Properties.Set("Отправлено", "X");
+                    //else
+                    //    Processing.ReportError("Не все документы были прикреплены к документу в SAP ERP");
                 }
+
             }
         }
     }
