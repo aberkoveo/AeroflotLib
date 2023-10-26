@@ -70,15 +70,22 @@ namespace AeroflotLib.Processing.ExportSap
             }
             catch (WebException webException)
             {
-                _processing.ReportError(webException.Message + "\n" + webException.InnerException);
-                _logger.Error(webException.Message + "\n" + webException.InnerException);
-                throw new Exception("Отправка вложений в SAP была провалена"); 
+                _processing.ReportError(webException.Message + "\n" + webException.InnerException + " Подробности в логе экспорта");
+                _logger.Error("Исключение типа " + webException.GetType() + ": "  +  
+                    webException.Message + "\n" +
+                    "Status: " + webException.Status + "\n" +
+                    "StackTrace: " + webException.StackTrace + "\n" +
+                    webException.InnerException);
+                throw new Exception(" WebException: Отправка вложений в SAP была провалена"); 
             }
             catch (Exception exception)
             {
-                _processing.ReportError(exception.Message + "\n" + exception.InnerException);
-                _logger.Error(exception.Message + "\n" + exception.InnerException);
-                throw new Exception("Отправка вложений в SAP была провалена");
+                _processing.ReportError(exception.Message + "\n" + exception.InnerException + " Подробности в логе экспорта");
+                _logger.Error("Исключение типа " + exception.GetType() + ": " + 
+                    exception.Message + "\n" +
+                    "StackTrace: " + exception.StackTrace + "\n" + 
+                    exception.InnerException);
+                throw new Exception("Exception: Отправка вложений в SAP была провалена");
             }
 
 
