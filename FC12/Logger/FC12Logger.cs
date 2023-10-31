@@ -38,7 +38,7 @@ namespace FC12
         {
             FileTarget target = new FileTarget();
             string rootLogPath;
-            string dateNow = DateTime.Now.ToString("dd_MM_yyyy");
+            string dateNow = DateTime.Now.ToString("MM_yyyy");
 
             target.Name = "FC12LogFile";
             target.CreateDirs = true;
@@ -90,7 +90,7 @@ namespace FC12
                     break;
 
                 default:
-                    throw new NotImplementedException("FC12Logger: Неизвестный тип объекта FlexiCapture12."); 
+                    throw new NotImplementedException("FC12Logger: Неизвестный тип объекта."); 
             }
 
             return target;
