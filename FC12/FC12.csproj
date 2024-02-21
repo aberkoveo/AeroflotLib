@@ -79,6 +79,7 @@
     </Compile>
     <Compile Include="SupportExtensions\Outlook\OutlookHelper.cs" />
     <Compile Include="SupportExtensions\SupportRequestBuilder.cs" />
+    <Compile Include="SupportingTasks\WindowsProcessHandler.cs" />
     <Compile Include="Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -105,5 +106,6 @@
       <Name>Integra.Client</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

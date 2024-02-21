@@ -57,6 +57,7 @@
     <Reference Include="System.Xml.Serialization" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ProcessKillingTests.cs" />
     <Compile Include="GlobalUsing.cs" />
     <Compile Include="SapExport\TestXmlBody.cs" />
     <Compile Include="UnitTestWindowsForm.cs" />
