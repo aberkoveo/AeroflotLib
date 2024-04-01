@@ -16,7 +16,7 @@ namespace FC12.SupportExtensions.Models
         //[DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID { get; set; }
         public int SMID { get; set; }
-        private readonly string _subject = Mail.Subject;
+        private readonly string _subject = SupportData.Subject;
         public readonly string CreationDate;
         public string Subject
         {
@@ -32,6 +32,8 @@ namespace FC12.SupportExtensions.Models
         private CustomList<string> _categories { get; set; } = new CustomList<string>();
 
         public string Comment { get; set; }
+
+        public string[] DocumentsIds { get; set; }
 
         public bool IsValid()
         {

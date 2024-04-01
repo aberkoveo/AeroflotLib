@@ -36,12 +36,16 @@ namespace FC12.SupportExtensions.Outlook
             string categoriesText = request.Categories;
             _mailItem.BodyFormat = OutlookInterop.OlBodyFormat.olFormatHTML;
             _mailItem.HTMLBody = String.Format(bodyText,
-                categoriesText, request.BatchId, request.BatchName, request.Comment);
+                categoriesText, 
+                request.BatchId, 
+                String.Join(",", request.DocumentsIds), 
+                request.BatchName, 
+                request.Comment);
         }
 
         private string GetBody()
         {
-            string[] BodyArray = Mail.Body;
+            string[] BodyArray = SupportData.Body;
             return String.Join("", BodyArray);
         }
     }

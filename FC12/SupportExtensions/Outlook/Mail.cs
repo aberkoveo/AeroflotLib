@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace FC12.SupportExtensions.Outlook
 {
-    public static class Mail
+    public static class SupportData
     {
-        public static string Subject { get; } = "Запрос в техподдержку;";
+        public static string Subject { get; } = "Запрос в техподдержку ПСК;";
 
         public static string[] Body = new string[]
         {
@@ -16,10 +16,12 @@ namespace FC12.SupportExtensions.Outlook
             "<br></br>",
             "<br>Идентификатор пакета: {1}</br>",
             "<br></br>",
-            "<br>Имя пакета: {2}</br>",
+            "<br>Идентификаторы документов: {2}</br>",
+            "<br></br>",
+            "<br>Имя пакета: {3}</br>",
             "<br></br>",
             "<br>Комментарий:</br>",
-            "<br>{3}</br>"
+            "<br>{4}</br>"
         };
 
         

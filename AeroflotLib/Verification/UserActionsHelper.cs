@@ -17,12 +17,12 @@ namespace AeroflotLib.Verification
 {
     public static class UserActionsHelper
     {
-        public static void SendSupportEmail(IBatch batch)
+        public static void ExecuteSupportRequest(IBatch batch, string[] documentsIds)
         {
             string intgraURL = batch.Project.EnvironmentVariables.Get("IntegraURL");
             IntegraClient integraClient = new IntegraClient(intgraURL, new HttpClient());
 
-            SupportRequest request = SupportRequestBuilder.SupportRequestBuild(batch);
+            SupportRequest request = SupportRequestBuilder.SupportRequestBuild(batch, documentsIds);
 
             Application.EnableVisualStyles();
             Application.Run(new SupportMessageForm(request, integraClient));

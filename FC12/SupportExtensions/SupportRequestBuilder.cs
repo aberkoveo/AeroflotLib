@@ -10,7 +10,14 @@ namespace FC12.SupportExtensions
 {
     public static class SupportRequestBuilder 
     {
-        public  static SupportRequest SupportRequestBuild(IBatch batch)
+        public  static SupportRequest SupportRequestBuild(IBatch batch, string[] documentsIds)
+        {
+            SupportRequest request = SupportRequestBuild(batch);
+            request.DocumentsIds = documentsIds;
+            return request;
+        }
+
+        public static SupportRequest SupportRequestBuild(IBatch batch)
         {
             return new SupportRequest
             {
@@ -19,6 +26,7 @@ namespace FC12.SupportExtensions
                 BatchOwner = batch.CreatedBy.Name,
                 Recipient = GetRecipient(batch),
                 CC = GetCC(batch),
+                DocumentsIds = new[] { "" }
             };
         }
 

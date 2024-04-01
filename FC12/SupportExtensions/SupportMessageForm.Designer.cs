@@ -170,9 +170,9 @@
             this.CategoryAttributeCheckBox.Location = new System.Drawing.Point(10, 66);
             this.CategoryAttributeCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.CategoryAttributeCheckBox.Name = "CategoryAttributeCheckBox";
-            this.CategoryAttributeCheckBox.Size = new System.Drawing.Size(186, 21);
+            this.CategoryAttributeCheckBox.Size = new System.Drawing.Size(179, 21);
             this.CategoryAttributeCheckBox.TabIndex = 9;
-            this.CategoryAttributeCheckBox.Text = "Извлечение аттрибутов";
+            this.CategoryAttributeCheckBox.Text = "Извлечение атрибутов";
             this.CategoryAttributeCheckBox.UseVisualStyleBackColor = true;
             this.CategoryAttributeCheckBox.CheckedChanged += new System.EventHandler(this.CategoryAttributeCheckBox_CheckedChanged);
             // 

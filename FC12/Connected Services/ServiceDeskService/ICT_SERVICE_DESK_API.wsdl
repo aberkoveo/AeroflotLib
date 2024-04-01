@@ -1,0 +1,864 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:n1="urn:sap-com:document:sap:rfc:functions" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation>
+    <sidl:sidl xmlns:sidl="http://www.sap.com/2007/03/sidl" />
+  </wsdl:documentation>
+  <wsp:UsingPolicy wsdl:required="true" />
+  <wsp:Policy wsu:Id="IF_IF_ICT_SERVICE_DESK_API">
+    <sapsession:Session xmlns:sapsession="http://www.sap.com/webas/630/soap/features/session/">
+      <sapsession:enableSession>false</sapsession:enableSession>
+    </sapsession:Session>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="OP_IF_OP_ListUnclosedIncidents">
+    <sapcomhnd:enableCommit xmlns:sapcomhnd="http://www.sap.com/NW05/soap/features/commit/">false</sapcomhnd:enableCommit>
+    <sapblock:enableBlocking xmlns:sapblock="http://www.sap.com/NW05/soap/features/blocking/">true</sapblock:enableBlocking>
+    <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
+    <saprmnw05:enableWSRM xmlns:saprmnw05="http://www.sap.com/NW05/soap/features/wsrm/">false</saprmnw05:enableWSRM>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="OP_IF_OP_GetPossibleValues">
+    <sapcomhnd:enableCommit xmlns:sapcomhnd="http://www.sap.com/NW05/soap/features/commit/">false</sapcomhnd:enableCommit>
+    <sapblock:enableBlocking xmlns:sapblock="http://www.sap.com/NW05/soap/features/blocking/">true</sapblock:enableBlocking>
+    <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
+    <saprmnw05:enableWSRM xmlns:saprmnw05="http://www.sap.com/NW05/soap/features/wsrm/">false</saprmnw05:enableWSRM>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="OP_IF_OP_RequestSystemGuid">
+    <sapcomhnd:enableCommit xmlns:sapcomhnd="http://www.sap.com/NW05/soap/features/commit/">false</sapcomhnd:enableCommit>
+    <sapblock:enableBlocking xmlns:sapblock="http://www.sap.com/NW05/soap/features/blocking/">true</sapblock:enableBlocking>
+    <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
+    <saprmnw05:enableWSRM xmlns:saprmnw05="http://www.sap.com/NW05/soap/features/wsrm/">false</saprmnw05:enableWSRM>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="OP_IF_OP_RejectIncidentSolution">
+    <sapcomhnd:enableCommit xmlns:sapcomhnd="http://www.sap.com/NW05/soap/features/commit/">false</sapcomhnd:enableCommit>
+    <sapblock:enableBlocking xmlns:sapblock="http://www.sap.com/NW05/soap/features/blocking/">true</sapblock:enableBlocking>
+    <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
+    <saprmnw05:enableWSRM xmlns:saprmnw05="http://www.sap.com/NW05/soap/features/wsrm/">false</saprmnw05:enableWSRM>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="OP_IF_OP_RequestGuid">
+    <sapcomhnd:enableCommit xmlns:sapcomhnd="http://www.sap.com/NW05/soap/features/commit/">false</sapcomhnd:enableCommit>
+    <sapblock:enableBlocking xmlns:sapblock="http://www.sap.com/NW05/soap/features/blocking/">true</sapblock:enableBlocking>
+    <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
+    <saprmnw05:enableWSRM xmlns:saprmnw05="http://www.sap.com/NW05/soap/features/wsrm/">false</saprmnw05:enableWSRM>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="OP_IF_OP_AcceptIncidentProcessing">
+    <sapcomhnd:enableCommit xmlns:sapcomhnd="http://www.sap.com/NW05/soap/features/commit/">false</sapcomhnd:enableCommit>
+    <sapblock:enableBlocking xmlns:sapblock="http://www.sap.com/NW05/soap/features/blocking/">true</sapblock:enableBlocking>
+    <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
+    <saprmnw05:enableWSRM xmlns:saprmnw05="http://www.sap.com/NW05/soap/features/wsrm/">false</saprmnw05:enableWSRM>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="OP_IF_OP_ReplicateIncident">
+    <sapcomhnd:enableCommit xmlns:sapcomhnd="http://www.sap.com/NW05/soap/features/commit/">false</sapcomhnd:enableCommit>
+    <sapblock:enableBlocking xmlns:sapblock="http://www.sap.com/NW05/soap/features/blocking/">true</sapblock:enableBlocking>
+    <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
+    <saprmnw05:enableWSRM xmlns:saprmnw05="http://www.sap.com/NW05/soap/features/wsrm/">false</saprmnw05:enableWSRM>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="OP_IF_OP_VerifyIncidentSolution">
+    <sapcomhnd:enableCommit xmlns:sapcomhnd="http://www.sap.com/NW05/soap/features/commit/">false</sapcomhnd:enableCommit>
+    <sapblock:enableBlocking xmlns:sapblock="http://www.sap.com/NW05/soap/features/blocking/">true</sapblock:enableBlocking>
+    <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
+    <saprmnw05:enableWSRM xmlns:saprmnw05="http://www.sap.com/NW05/soap/features/wsrm/">false</saprmnw05:enableWSRM>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="OP_IF_OP_CloseIncident">
+    <sapcomhnd:enableCommit xmlns:sapcomhnd="http://www.sap.com/NW05/soap/features/commit/">false</sapcomhnd:enableCommit>
+    <sapblock:enableBlocking xmlns:sapblock="http://www.sap.com/NW05/soap/features/blocking/">true</sapblock:enableBlocking>
+    <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
+    <saprmnw05:enableWSRM xmlns:saprmnw05="http://www.sap.com/NW05/soap/features/wsrm/">false</saprmnw05:enableWSRM>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="OP_IF_OP_ProcessIncident">
+    <sapcomhnd:enableCommit xmlns:sapcomhnd="http://www.sap.com/NW05/soap/features/commit/">false</sapcomhnd:enableCommit>
+    <sapblock:enableBlocking xmlns:sapblock="http://www.sap.com/NW05/soap/features/blocking/">true</sapblock:enableBlocking>
+    <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
+    <saprmnw05:enableWSRM xmlns:saprmnw05="http://www.sap.com/NW05/soap/features/wsrm/">false</saprmnw05:enableWSRM>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="OP_IF_OP_AddInfo">
+    <sapcomhnd:enableCommit xmlns:sapcomhnd="http://www.sap.com/NW05/soap/features/commit/">false</sapcomhnd:enableCommit>
+    <sapblock:enableBlocking xmlns:sapblock="http://www.sap.com/NW05/soap/features/blocking/">true</sapblock:enableBlocking>
+    <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
+    <saprmnw05:enableWSRM xmlns:saprmnw05="http://www.sap.com/NW05/soap/features/wsrm/">false</saprmnw05:enableWSRM>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="OP_IF_OP_ReadCompleteIncident">
+    <sapcomhnd:enableCommit xmlns:sapcomhnd="http://www.sap.com/NW05/soap/features/commit/">false</sapcomhnd:enableCommit>
+    <sapblock:enableBlocking xmlns:sapblock="http://www.sap.com/NW05/soap/features/blocking/">true</sapblock:enableBlocking>
+    <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
+    <saprmnw05:enableWSRM xmlns:saprmnw05="http://www.sap.com/NW05/soap/features/wsrm/">false</saprmnw05:enableWSRM>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema xmlns:tns="urn:sap-com:document:sap:rfc:functions" attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:rfc:functions">
+      <xsd:simpleType name="char1">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="1" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char10">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="10" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char128">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="128" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char2">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char240">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="240" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char255">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="255" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char30">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="30" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char32">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="32" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char40">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char4096">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="4096" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char60">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="60" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char64">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="64" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char75">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="75" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="decimal15.0">
+        <xsd:restriction base="xsd:decimal">
+          <xsd:totalDigits value="15" />
+          <xsd:fractionDigits value="0" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="string">
+        <xsd:restriction base="xsd:string" />
+      </xsd:simpleType>
+    </xsd:schema>
+    <xsd:schema xmlns:n0="urn:sap-com:document:sap:rfc:functions" attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style">
+      <xsd:import namespace="urn:sap-com:document:sap:rfc:functions" />
+      <xsd:complexType name="IctIncidentAttachment">
+        <xsd:sequence>
+          <xsd:element name="AttachmentGuid" type="n0:char32" />
+          <xsd:element name="Filename" type="n0:string" />
+          <xsd:element name="MimeType" type="n0:char128" />
+          <xsd:element name="Data" type="xsd:base64Binary" />
+          <xsd:element name="Timestamp" type="n0:decimal15.0" />
+          <xsd:element name="PersonId" type="n0:char32" />
+          <xsd:element name="Url" type="n0:char4096" />
+          <xsd:element name="Language" type="n0:char2" />
+          <xsd:element name="Delete" type="n0:char1" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="IctIncidentSapNote">
+        <xsd:sequence>
+          <xsd:element name="NoteId" type="n0:char30" />
+          <xsd:element name="NoteDescription" type="n0:char60" />
+          <xsd:element name="Timestamp" type="n0:decimal15.0" />
+          <xsd:element name="PersonId" type="n0:char32" />
+          <xsd:element name="Url" type="n0:char4096" />
+          <xsd:element name="Language" type="n0:char2" />
+          <xsd:element name="Delete" type="n0:char1" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="IctIncidentAdditionalInfo">
+        <xsd:sequence>
+          <xsd:element name="Guid" type="n0:char32" />
+          <xsd:element name="ParentGuid" type="n0:char32" />
+          <xsd:element name="AddInfoAttribute" type="n0:char255" />
+          <xsd:element name="AddInfoValue" type="n0:char255" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="IctIncidentSolution">
+        <xsd:sequence>
+          <xsd:element name="SolutionId" type="n0:char32" />
+          <xsd:element name="SolutionDescription" type="n0:char60" />
+          <xsd:element name="Timestamp" type="n0:decimal15.0" />
+          <xsd:element name="PersonId" type="n0:char32" />
+          <xsd:element name="Url" type="n0:char4096" />
+          <xsd:element name="Language" type="n0:char2" />
+          <xsd:element name="Delete" type="n0:char1" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="IctIncidentStatement">
+        <xsd:sequence>
+          <xsd:element name="TextType" type="n0:char32" />
+          <xsd:element name="Texts" type="tns:IctIncidentTexts" />
+          <xsd:element name="Timestamp" type="n0:decimal15.0" />
+          <xsd:element name="PersonId" type="n0:char32" />
+          <xsd:element name="Language" type="n0:char2" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="IctIncidentUrl">
+        <xsd:sequence>
+          <xsd:element name="UrlGuid" type="n0:char32" />
+          <xsd:element name="Url" type="n0:char4096" />
+          <xsd:element name="UrlName" type="n0:char40" />
+          <xsd:element name="UrlDescription" type="n0:char64" />
+          <xsd:element name="Timestamp" type="n0:decimal15.0" />
+          <xsd:element name="PersonId" type="n0:char32" />
+          <xsd:element name="Language" type="n0:char2" />
+          <xsd:element name="Delete" type="n0:char1" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="IctIncidentPerson">
+        <xsd:sequence>
+          <xsd:element name="PersonId" type="n0:char32" />
+          <xsd:element name="PersonIdExt" type="n0:char32" />
+          <xsd:element name="Sex" type="n0:char1" />
+          <xsd:element name="FirstName" type="n0:char40" />
+          <xsd:element name="LastName" type="n0:char40" />
+          <xsd:element name="Telephone" type="tns:IctPhone" />
+          <xsd:element name="MobilePhone" type="n0:char30" />
+          <xsd:element name="Fax" type="tns:IctFax" />
+          <xsd:element name="Email" type="n0:char240" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="IctFax">
+        <xsd:sequence>
+          <xsd:element name="FaxNo" type="n0:char30" />
+          <xsd:element name="FaxNoExtension" type="n0:char10" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="IctPhone">
+        <xsd:sequence>
+          <xsd:element name="PhoneNo" type="n0:char30" />
+          <xsd:element name="PhoneNoExtension" type="n0:char10" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="IctIncidentHead">
+        <xsd:sequence>
+          <xsd:element name="IncidentGuid" type="n0:char32" />
+          <xsd:element name="RequesterGuid" type="n0:char32" />
+          <xsd:element name="ProviderGuid" type="n0:char32" />
+          <xsd:element name="AgentId" type="n0:char32" />
+          <xsd:element name="ReporterId" type="n0:char32" />
+          <xsd:element name="ShortDescription" type="n0:char40" />
+          <xsd:element name="Priority" type="n0:char32" />
+          <xsd:element name="Language" type="n0:char2" />
+          <xsd:element name="RequestedBegin" type="n0:decimal15.0" />
+          <xsd:element name="RequestedEnd" type="n0:decimal15.0" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="IctError">
+        <xsd:sequence>
+          <xsd:element name="ErrorCode" type="xsd:unsignedByte" />
+          <xsd:element name="Val1" type="n0:char255" />
+          <xsd:element name="Val2" type="n0:char255" />
+          <xsd:element name="Val3" type="n0:char255" />
+          <xsd:element name="Val4" type="n0:char255" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="IctPersonMap">
+        <xsd:sequence>
+          <xsd:element name="PersonId" type="n0:char32" />
+          <xsd:element name="PersonIdExt" type="n0:char32" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="IctAllAttachment">
+        <xsd:sequence>
+          <xsd:element name="AttachmentGuid" type="n0:char32" />
+          <xsd:element name="Filename" type="n0:string" />
+          <xsd:element name="MimeType" type="n0:char128" />
+          <xsd:element name="Data" type="xsd:base64Binary" />
+          <xsd:element name="Timestamp" type="n0:decimal15.0" />
+          <xsd:element name="PersonId" type="n0:char32" />
+          <xsd:element name="Url" type="n0:char4096" />
+          <xsd:element name="Language" type="n0:char2" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="IctAllSapNote">
+        <xsd:sequence>
+          <xsd:element name="NoteId" type="n0:char30" />
+          <xsd:element name="NoteDescription" type="n0:char60" />
+          <xsd:element name="Timestamp" type="n0:decimal15.0" />
+          <xsd:element name="PersonId" type="n0:char32" />
+          <xsd:element name="Url" type="n0:char4096" />
+          <xsd:element name="Language" type="n0:char2" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="IctAllSolution">
+        <xsd:sequence>
+          <xsd:element name="SolutionId" type="n0:char32" />
+          <xsd:element name="SolutionDescription" type="n0:char60" />
+          <xsd:element name="Timestamp" type="n0:decimal15.0" />
+          <xsd:element name="PersonId" type="n0:char32" />
+          <xsd:element name="Url" type="n0:char4096" />
+          <xsd:element name="Language" type="n0:char2" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="IctAllStatement">
+        <xsd:sequence>
+          <xsd:element name="TextType" type="n0:char32" />
+          <xsd:element name="Texts" type="tns:IctIncidentTexts" />
+          <xsd:element name="Timestamp" type="n0:decimal15.0" />
+          <xsd:element name="PersonId" type="n0:char32" />
+          <xsd:element name="Language" type="n0:char2" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="IctAllUrl">
+        <xsd:sequence>
+          <xsd:element name="UrlGuid" type="n0:char32" />
+          <xsd:element name="Url" type="n0:char4096" />
+          <xsd:element name="UrlName" type="n0:char40" />
+          <xsd:element name="UrlDescription" type="n0:char64" />
+          <xsd:element name="Timestamp" type="n0:decimal15.0" />
+          <xsd:element name="PersonId" type="n0:char32" />
+          <xsd:element name="Language" type="n0:char2" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="IctPriority">
+        <xsd:sequence>
+          <xsd:element name="Priority" type="n0:char32" />
+          <xsd:element name="Description" type="n0:char75" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="IctTextType">
+        <xsd:sequence>
+          <xsd:element name="TextType" type="n0:char32" />
+          <xsd:element name="Description" type="n0:char75" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="IctAdditionalInfoValue">
+        <xsd:sequence>
+          <xsd:element name="AddInfoAttribute" type="n0:char255" />
+          <xsd:element name="AddInfoValue" type="n0:char255" />
+          <xsd:element name="Description" type="n0:char75" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="IctIncident">
+        <xsd:sequence>
+          <xsd:element name="IncidentGuid" type="n0:char32" />
+          <xsd:element name="RequesterGuid" type="n0:char32" />
+          <xsd:element name="ProviderGuid" type="n0:char32" />
+          <xsd:element name="Status" type="n0:char2" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="IctIncidentAttachments">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:IctIncidentAttachment" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="IctIncidentSapNotes">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:IctIncidentSapNote" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="IctIncidentAdditionalInfos">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:IctIncidentAdditionalInfo" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="IctIncidentSolutions">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:IctIncidentSolution" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="IctIncidentStatements">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:IctIncidentStatement" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="IctIncidentTexts">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="n0:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="IctIncidentUrls">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:IctIncidentUrl" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="IctIncidentPersons">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:IctIncidentPerson" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="IctErrors">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:IctError" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="IctPersonMaps">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:IctPersonMap" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="IctAllAttachments">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:IctAllAttachment" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="IctAllSapNotes">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:IctAllSapNote" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="IctAllSolutions">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:IctAllSolution" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="IctAllStatements">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:IctAllStatement" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="IctAllUrls">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:IctAllUrl" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="IctPriorities">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:IctPriority" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="IctTextTypes">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:IctTextType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="IctAdditionalInfoValues">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:IctAdditionalInfoValue" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="IctIncidents">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:IctIncident" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="ProcessIncident">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="IctAdditionalInfos" type="tns:IctIncidentAdditionalInfos" />
+            <xsd:element name="IctAttachments" type="tns:IctIncidentAttachments" />
+            <xsd:element name="IctHead" type="tns:IctIncidentHead" />
+            <xsd:element name="IctId" type="n0:char32" />
+            <xsd:element name="IctPersons" type="tns:IctIncidentPersons" />
+            <xsd:element name="IctSapNotes" type="tns:IctIncidentSapNotes" />
+            <xsd:element name="IctSolutions" type="tns:IctIncidentSolutions" />
+            <xsd:element name="IctStatements" type="tns:IctIncidentStatements" />
+            <xsd:element name="IctTimestamp" type="n0:decimal15.0" />
+            <xsd:element name="IctUrls" type="tns:IctIncidentUrls" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ProcessIncidentResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Errors" type="tns:IctErrors" />
+            <xsd:element name="PersonMaps" type="tns:IctPersonMaps" />
+            <xsd:element name="PrdIctId" type="n0:char32" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CloseIncident">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="IctAdditionalInfos" type="tns:IctIncidentAdditionalInfos" />
+            <xsd:element name="IctAttachments" type="tns:IctIncidentAttachments" />
+            <xsd:element name="IctHead" type="tns:IctIncidentHead" />
+            <xsd:element name="IctPersons" type="tns:IctIncidentPersons" />
+            <xsd:element name="IctSapNotes" type="tns:IctIncidentSapNotes" />
+            <xsd:element name="IctSolutions" type="tns:IctIncidentSolutions" />
+            <xsd:element name="IctStatements" type="tns:IctIncidentStatements" />
+            <xsd:element name="IctUrls" type="tns:IctIncidentUrls" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CloseIncidentResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Errors" type="tns:IctErrors" />
+            <xsd:element name="PersonMaps" type="tns:IctPersonMaps" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="AddInfo">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="IctAdditionalInfos" type="tns:IctIncidentAdditionalInfos" />
+            <xsd:element name="IctAttachments" type="tns:IctIncidentAttachments" />
+            <xsd:element name="IctHead" type="tns:IctIncidentHead" />
+            <xsd:element name="IctPersons" type="tns:IctIncidentPersons" />
+            <xsd:element name="IctSapNotes" type="tns:IctIncidentSapNotes" />
+            <xsd:element name="IctSolutions" type="tns:IctIncidentSolutions" />
+            <xsd:element name="IctStatements" type="tns:IctIncidentStatements" />
+            <xsd:element name="IctUrls" type="tns:IctIncidentUrls" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="AddInfoResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Errors" type="tns:IctErrors" />
+            <xsd:element name="PersonMaps" type="tns:IctPersonMaps" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="VerifyIncidentSolution">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="IctAdditionalInfos" type="tns:IctIncidentAdditionalInfos" />
+            <xsd:element name="IctAttachments" type="tns:IctIncidentAttachments" />
+            <xsd:element name="IctHead" type="tns:IctIncidentHead" />
+            <xsd:element name="IctPersons" type="tns:IctIncidentPersons" />
+            <xsd:element name="IctSapNotes" type="tns:IctIncidentSapNotes" />
+            <xsd:element name="IctSolutions" type="tns:IctIncidentSolutions" />
+            <xsd:element name="IctStatements" type="tns:IctIncidentStatements" />
+            <xsd:element name="IctUrls" type="tns:IctIncidentUrls" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="VerifyIncidentSolutionResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Errors" type="tns:IctErrors" />
+            <xsd:element name="PersonMaps" type="tns:IctPersonMaps" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ReplicateIncident">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="IctAdditionalInfos" type="tns:IctIncidentAdditionalInfos" />
+            <xsd:element name="IctAttachments" type="tns:IctIncidentAttachments" />
+            <xsd:element name="IctHead" type="tns:IctIncidentHead" />
+            <xsd:element name="IctId" type="n0:char32" />
+            <xsd:element name="IctPersons" type="tns:IctIncidentPersons" />
+            <xsd:element name="IctSapNotes" type="tns:IctIncidentSapNotes" />
+            <xsd:element name="IctSolutions" type="tns:IctIncidentSolutions" />
+            <xsd:element name="IctStatements" type="tns:IctIncidentStatements" />
+            <xsd:element name="IctTimestamp" type="n0:decimal15.0" />
+            <xsd:element name="IctUrls" type="tns:IctIncidentUrls" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ReplicateIncidentResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Errors" type="tns:IctErrors" />
+            <xsd:element name="PersonMaps" type="tns:IctPersonMaps" />
+            <xsd:element name="PrdIctId" type="n0:char32" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="AcceptIncidentProcessing">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="IctAdditionalInfos" type="tns:IctIncidentAdditionalInfos" />
+            <xsd:element name="IctAttachments" type="tns:IctIncidentAttachments" />
+            <xsd:element name="IctHead" type="tns:IctIncidentHead" />
+            <xsd:element name="IctPersons" type="tns:IctIncidentPersons" />
+            <xsd:element name="IctSapNotes" type="tns:IctIncidentSapNotes" />
+            <xsd:element name="IctSolutions" type="tns:IctIncidentSolutions" />
+            <xsd:element name="IctStatements" type="tns:IctIncidentStatements" />
+            <xsd:element name="IctUrls" type="tns:IctIncidentUrls" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="AcceptIncidentProcessingResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Errors" type="tns:IctErrors" />
+            <xsd:element name="PersonMaps" type="tns:IctPersonMaps" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ReadCompleteIncident">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="IncidentGuid" type="n0:char32" />
+            <xsd:element name="SystemGuid" type="n0:char32" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ReadCompleteIncidentResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Errors" type="tns:IctErrors" />
+            <xsd:element name="IctAdditionalInfos" type="tns:IctIncidentAdditionalInfos" />
+            <xsd:element name="IctAttachments" type="tns:IctAllAttachments" />
+            <xsd:element name="IctHead" type="tns:IctIncidentHead" />
+            <xsd:element name="IctPersons" type="tns:IctIncidentPersons" />
+            <xsd:element name="IctSapNotes" type="tns:IctAllSapNotes" />
+            <xsd:element name="IctSolutions" type="tns:IctAllSolutions" />
+            <xsd:element name="IctStatements" type="tns:IctAllStatements" />
+            <xsd:element name="IctStatus" type="n0:char2" />
+            <xsd:element name="IctUrls" type="tns:IctAllUrls" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="RequestGuid">
+        <xsd:complexType>
+          <xsd:sequence />
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="RequestGuidResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Errors" type="tns:IctErrors" />
+            <xsd:element name="Guid" type="n0:char32" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="RejectIncidentSolution">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="IctAdditionalInfos" type="tns:IctIncidentAdditionalInfos" />
+            <xsd:element name="IctAttachments" type="tns:IctIncidentAttachments" />
+            <xsd:element name="IctHead" type="tns:IctIncidentHead" />
+            <xsd:element name="IctPersons" type="tns:IctIncidentPersons" />
+            <xsd:element name="IctSapNotes" type="tns:IctIncidentSapNotes" />
+            <xsd:element name="IctSolutions" type="tns:IctIncidentSolutions" />
+            <xsd:element name="IctStatements" type="tns:IctIncidentStatements" />
+            <xsd:element name="IctUrls" type="tns:IctIncidentUrls" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="RejectIncidentSolutionResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Errors" type="tns:IctErrors" />
+            <xsd:element name="PersonMaps" type="tns:IctPersonMaps" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="RequestSystemGuid">
+        <xsd:complexType>
+          <xsd:sequence />
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="RequestSystemGuidResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Errors" type="tns:IctErrors" />
+            <xsd:element name="SystemGuid" type="n0:char32" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetPossibleValues">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Language" type="n0:char2" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetPossibleValuesResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="AdditionalInfoValues" type="tns:IctAdditionalInfoValues" />
+            <xsd:element name="Priorities" type="tns:IctPriorities" />
+            <xsd:element name="TextTypes" type="tns:IctTextTypes" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ListUnclosedIncidents">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="SystemGuid" type="n0:char32" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ListUnclosedIncidentsResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Errors" type="tns:IctErrors" />
+            <xsd:element name="Incidents" type="tns:IctIncidents" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ProcessIncident">
+    <wsdl:part name="parameters" element="tns:ProcessIncident" />
+  </wsdl:message>
+  <wsdl:message name="ProcessIncidentResponse">
+    <wsdl:part name="parameter" element="tns:ProcessIncidentResponse" />
+  </wsdl:message>
+  <wsdl:message name="CloseIncident">
+    <wsdl:part name="parameters" element="tns:CloseIncident" />
+  </wsdl:message>
+  <wsdl:message name="CloseIncidentResponse">
+    <wsdl:part name="parameter" element="tns:CloseIncidentResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddInfo">
+    <wsdl:part name="parameters" element="tns:AddInfo" />
+  </wsdl:message>
+  <wsdl:message name="AddInfoResponse">
+    <wsdl:part name="parameter" element="tns:AddInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyIncidentSolution">
+    <wsdl:part name="parameters" element="tns:VerifyIncidentSolution" />
+  </wsdl:message>
+  <wsdl:message name="VerifyIncidentSolutionResponse">
+    <wsdl:part name="parameter" element="tns:VerifyIncidentSolutionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReplicateIncident">
+    <wsdl:part name="parameters" element="tns:ReplicateIncident" />
+  </wsdl:message>
+  <wsdl:message name="ReplicateIncidentResponse">
+    <wsdl:part name="parameter" element="tns:ReplicateIncidentResponse" />
+  </wsdl:message>
+  <wsdl:message name="AcceptIncidentProcessing">
+    <wsdl:part name="parameters" element="tns:AcceptIncidentProcessing" />
+  </wsdl:message>
+  <wsdl:message name="AcceptIncidentProcessingResponse">
+    <wsdl:part name="parameter" element="tns:AcceptIncidentProcessingResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadCompleteIncident">
+    <wsdl:part name="parameters" element="tns:ReadCompleteIncident" />
+  </wsdl:message>
+  <wsdl:message name="ReadCompleteIncidentResponse">
+    <wsdl:part name="parameter" element="tns:ReadCompleteIncidentResponse" />
+  </wsdl:message>
+  <wsdl:message name="RequestGuid">
+    <wsdl:part name="parameters" element="tns:RequestGuid" />
+  </wsdl:message>
+  <wsdl:message name="RequestGuidResponse">
+    <wsdl:part name="parameter" element="tns:RequestGuidResponse" />
+  </wsdl:message>
+  <wsdl:message name="RejectIncidentSolution">
+    <wsdl:part name="parameters" element="tns:RejectIncidentSolution" />
+  </wsdl:message>
+  <wsdl:message name="RejectIncidentSolutionResponse">
+    <wsdl:part name="parameter" element="tns:RejectIncidentSolutionResponse" />
+  </wsdl:message>
+  <wsdl:message name="RequestSystemGuid">
+    <wsdl:part name="parameters" element="tns:RequestSystemGuid" />
+  </wsdl:message>
+  <wsdl:message name="RequestSystemGuidResponse">
+    <wsdl:part name="parameter" element="tns:RequestSystemGuidResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPossibleValues">
+    <wsdl:part name="parameters" element="tns:GetPossibleValues" />
+  </wsdl:message>
+  <wsdl:message name="GetPossibleValuesResponse">
+    <wsdl:part name="parameter" element="tns:GetPossibleValuesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListUnclosedIncidents">
+    <wsdl:part name="parameters" element="tns:ListUnclosedIncidents" />
+  </wsdl:message>
+  <wsdl:message name="ListUnclosedIncidentsResponse">
+    <wsdl:part name="parameter" element="tns:ListUnclosedIncidentsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ICT_SERVICE_DESK_API">
+    <wsdl:documentation>
+      <sapdoc:sapdoc xmlns:sapdoc="urn:sap:esi:documentation">
+        <sapdoc:docitem applicationComponent="SV-SMG-SUP" />
+      </sapdoc:sapdoc>
+    </wsdl:documentation>
+    <wsp:Policy>
+      <wsp:PolicyReference URI="#IF_IF_ICT_SERVICE_DESK_API" />
+    </wsp:Policy>
+    <wsdl:operation name="ProcessIncident">
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP_IF_OP_ProcessIncident" />
+      </wsp:Policy>
+      <wsdl:input message="tns:ProcessIncident" />
+      <wsdl:output message="tns:ProcessIncidentResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="CloseIncident">
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP_IF_OP_CloseIncident" />
+      </wsp:Policy>
+      <wsdl:input message="tns:CloseIncident" />
+      <wsdl:output message="tns:CloseIncidentResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="AddInfo">
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP_IF_OP_AddInfo" />
+      </wsp:Policy>
+      <wsdl:input message="tns:AddInfo" />
+      <wsdl:output message="tns:AddInfoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyIncidentSolution">
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP_IF_OP_VerifyIncidentSolution" />
+      </wsp:Policy>
+      <wsdl:input message="tns:VerifyIncidentSolution" />
+      <wsdl:output message="tns:VerifyIncidentSolutionResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ReplicateIncident">
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP_IF_OP_ReplicateIncident" />
+      </wsp:Policy>
+      <wsdl:input message="tns:ReplicateIncident" />
+      <wsdl:output message="tns:ReplicateIncidentResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="AcceptIncidentProcessing">
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP_IF_OP_AcceptIncidentProcessing" />
+      </wsp:Policy>
+      <wsdl:input message="tns:AcceptIncidentProcessing" />
+      <wsdl:output message="tns:AcceptIncidentProcessingResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadCompleteIncident">
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP_IF_OP_ReadCompleteIncident" />
+      </wsp:Policy>
+      <wsdl:input message="tns:ReadCompleteIncident" />
+      <wsdl:output message="tns:ReadCompleteIncidentResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="RequestGuid">
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP_IF_OP_RequestGuid" />
+      </wsp:Policy>
+      <wsdl:input message="tns:RequestGuid" />
+      <wsdl:output message="tns:RequestGuidResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="RejectIncidentSolution">
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP_IF_OP_RejectIncidentSolution" />
+      </wsp:Policy>
+      <wsdl:input message="tns:RejectIncidentSolution" />
+      <wsdl:output message="tns:RejectIncidentSolutionResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="RequestSystemGuid">
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP_IF_OP_RequestSystemGuid" />
+      </wsp:Policy>
+      <wsdl:input message="tns:RequestSystemGuid" />
+      <wsdl:output message="tns:RequestSystemGuidResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPossibleValues">
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP_IF_OP_GetPossibleValues" />
+      </wsp:Policy>
+      <wsdl:input message="tns:GetPossibleValues" />
+      <wsdl:output message="tns:GetPossibleValuesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ListUnclosedIncidents">
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP_IF_OP_ListUnclosedIncidents" />
+      </wsp:Policy>
+      <wsdl:input message="tns:ListUnclosedIncidents" />
+      <wsdl:output message="tns:ListUnclosedIncidentsResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>
