@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Integra.Domain;
 using Integra.Application.Interfaces;
 using Integra.Persistence.EntityTypeConfigurations;
+using Integra.Domain.Support;
 
 namespace Integra.Persistence;
 

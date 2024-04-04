@@ -1,4 +1,4 @@
-﻿using Integra.Domain;
+﻿using Integra.Domain.Support;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Integra.Domain;
+using Integra.Domain.Support;
 
 namespace Integra.Application.Interfaces;
 

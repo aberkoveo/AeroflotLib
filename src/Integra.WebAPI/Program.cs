@@ -5,6 +5,7 @@ using Integra.Application.Interfaces;
 using Integra.Persistence;
 using NLog;
 using NLog.Web;
+using Integra.WebAPI.Settings;
 
 var logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
 logger.Info("Запуск сервиса интеграции");
@@ -23,7 +24,8 @@ try
         config.AddProfile(new AssemblyMappingProfile(Assembly.GetExecutingAssembly()));
         config.AddProfile(new AssemblyMappingProfile(typeof(ISupportRequestDBContext).Assembly));
     });
-    
+
+    builder.Services.AddApiSettings(builder.Configuration);
 
     builder.Services.AddApplication();
     builder.Services.AddPersistence(builder.Configuration);

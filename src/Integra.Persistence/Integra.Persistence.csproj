@@ -10,15 +10,17 @@
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.8" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.5" />
       <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
+      <PackageReference Include="NLog" Version="5.2.8" />
+      <PackageReference Include="System.ServiceModel.Duplex" Version="4.10.*" />
+      <PackageReference Include="System.ServiceModel.Federation" Version="4.10.*" />
+      <PackageReference Include="System.ServiceModel.Http" Version="4.10.*" />
+      <PackageReference Include="System.ServiceModel.NetTcp" Version="4.10.*" />
+      <PackageReference Include="System.ServiceModel.Security" Version="4.10.*" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\Integra.Application\Integra.Application.csproj" />
       <ProjectReference Include="..\Integra.Domain\Integra.Domain.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="ContentCapture\" />
     </ItemGroup>
 
 </Project>

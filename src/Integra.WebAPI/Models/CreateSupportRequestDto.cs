@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using Integra.Domain;
 using Integra.Application.Common.Mappings;
 using Integra.Application.SupportRequests.Commands;
+using Integra.Domain.Support;
 
 namespace Integra.WebApi.Models;
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using ABBYY.FlexiCapture;
 using NLog;
@@ -10,10 +11,11 @@ namespace FC12
     public class FC12Logger
     {
 
-        public  Logger logger;
-        
+        public  Logger logger;      
         private LogFactory logFactory;
         private readonly string rootLogPathEnvVar;
+        private string loggingProperty = "LoggingLevel";
+
         public FC12Logger(Object fcobject, IProcessingCallback processing, string logPath = "rootLogPath")
         {
             rootLogPathEnvVar = logPath;
@@ -25,14 +27,39 @@ namespace FC12
         private void CreateLogFactory(Object fcobject)
         {
             FileTarget target = FC12FileTargetBuilder(fcobject);
+
+            string loggingLevel;
+
             LogFactory logFactory = new LogFactory().Setup().LoadConfiguration(builder =>
             {
+                
+
+                switch (fcobject)
+                {
+                    case IBatch batch:
+                        loggingLevel = Utilities.GetEnvironmentVariable(loggingProperty, batch.Project).ToLower();
+                        break;
+
+                    case IDocument document:
+                        loggingLevel = Utilities.GetEnvironmentVariable(loggingProperty, document.Batch.Project).ToLower();
+                        break;
+
+                    case IRuleContext context:
+                        loggingLevel = Utilities.GetEnvironmentVariable(loggingProperty, context.Document.Batch.Project).ToLower();
+                        break;
+
+                    default:
+                        loggingLevel = "debug";
+                        break;
+                }
+
                 builder.Configuration.AddTarget("*", target);
-                builder.Configuration.AddRule( new LoggingRule("*", LogLevel.Debug, target));
+                builder.Configuration.AddRule( new LoggingRule("*", LoggingLevelMap[loggingLevel], target));
             }).LogFactory;
 
             this.logFactory = logFactory;
         }
+
 
         private FileTarget FC12FileTargetBuilder(Object fcobject)
         {
@@ -95,6 +122,17 @@ namespace FC12
 
             return target;
         }
+
+
+        private Dictionary<string, LogLevel> LoggingLevelMap = new Dictionary<string, LogLevel>()
+        {
+            { "trace", LogLevel.Trace },
+            { "debug", LogLevel.Debug },
+            { "info", LogLevel.Info },
+            { "warn", LogLevel.Warn },
+            { "error", LogLevel.Error },
+            { "fatal", LogLevel.Fatal }
+        };
 
     }
 }

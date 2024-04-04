@@ -1,5 +1,5 @@
 ﻿using Integra.Application.Interfaces;
-using Integra.Domain;
+using Integra.Domain.Support;
 using MediatR;
 
 namespace Integra.Application.SupportRequests.Commands;

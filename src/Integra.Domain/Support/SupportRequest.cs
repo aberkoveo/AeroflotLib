@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using static System.String;
 
-namespace Integra.Domain;
+namespace Integra.Domain.Support;
 
 public class SupportRequest
 {
@@ -25,7 +25,7 @@ public class SupportRequest
     public string BatchId { get; set; }
     [NotMapped]
     public string BatchName { get; set; }
-    
+
     public string BatchOwner { get; set; }
     public string Comment { get; set; }
     [NotMapped]
@@ -46,7 +46,7 @@ public class SupportRequest
     {
         _categories.Remove(category);
     }
-    
+
     public string Categories
     {
         get { return Join(", ", _categories); }
@@ -67,7 +67,7 @@ public class CustomList<T> : List<T>
 {
     public new void Add(T item)
     {
-        if (!base.Contains(item)) base.Add(item);
+        if (!Contains(item)) base.Add(item);
     }
 }
 
