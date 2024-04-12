@@ -16,7 +16,7 @@ namespace Integra.Persistence.ContentCapture
 {
     public class ApplicationApi
     {
-        protected ILogger Logger => LogManager.GetLogger("VerifNotifyLogger");
+        protected ILogger Logger => LogManager.GetCurrentClassLogger();
 
         protected readonly FlexiCaptureWebServiceSoapClient _api;
         protected readonly ApiSettingsModel _settings;

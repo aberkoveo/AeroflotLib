@@ -23,4 +23,13 @@
       <ProjectReference Include="..\Integra.Domain\Integra.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Reference Include="ControllerInterop">
+        <HintPath>..\..\AeroflotLib\dll\ControllerInterop.dll</HintPath>
+      </Reference>
+      <Reference Include="CredentialManagement">
+        <HintPath>..\..\packages\CredentialManagement.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
 </Project>

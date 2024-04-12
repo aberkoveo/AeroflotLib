@@ -9,7 +9,6 @@ namespace Integra.WebAPI.Settings
         {
             services.Configure<ApiSettingsModel>(configuration.GetSection("ApiSettings"));
 
-
             return services;
         }
     }
