@@ -60,6 +60,7 @@
     <Compile Include="ProcessKillingTests.cs" />
     <Compile Include="GlobalUsing.cs" />
     <Compile Include="SapExport\TestXmlBody.cs" />
+    <Compile Include="Solman\SolmanTests.cs" />
     <Compile Include="UnitTestWindowsForm.cs" />
     <Compile Include="UnitTestOutlook.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

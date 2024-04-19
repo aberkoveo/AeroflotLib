@@ -74,8 +74,8 @@ public class CustomList<T> : List<T>
 
 public enum Priority : ushort
 {
-    Low = 0,
-    Medium = 1,
+    Low = 4,
+    Medium = 3,
     High = 2,
-    Urgent = 3,
+    Urgent = 1,
 }

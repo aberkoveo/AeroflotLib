@@ -5,10 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Integra.Persistence.ContentCapture
+namespace Integra.Persistence.ContentCapture.Web;
+
+public interface IBatchManager
 {
-    public interface IBatchManager
-    {
-        Task<int> HandleBatchAsync(ContentBatch contentBatch);
-    }
+    Task<int> HandleBatchAsync(ContentBatch contentBatch);
 }

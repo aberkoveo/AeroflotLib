@@ -148,6 +148,7 @@ namespace FC12.SupportExtensions
                 Smid = Request.SMID
             };
 
+
             _integraClient.SupportRequestPOSTAsync(requestDto);
         }
     }

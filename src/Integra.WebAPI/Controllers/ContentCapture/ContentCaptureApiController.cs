@@ -5,10 +5,10 @@ using Integra.WebApi.Models;
 using Integra.Persistence;
 using Integra.Application.SupportRequests.Commands;
 using Microsoft.AspNetCore.Authorization;
-
-using Integra.Persistence.ContentCapture;
 using Integra.Domain.ContentCapture;
 using NLog;
+using Integra.Persistence.ContentCapture.Web;
+using Integra.WebApi.Utils;
 
 namespace Integra.WebApi.Controllers.Controllers;
 
@@ -33,6 +33,7 @@ public class ContentCaptureApiController : BaseController
     public async Task<ActionResult<int>> HandleBatch([FromBody] ContentBatch batch)
     {
         _logger.Info($"Получен запрос на обработку пакета {batch.Name}.");
+        _logger.Debug(JsonWriter.ConvertObject(batch));
 
         using (var scope = _serviceProvider.CreateScope())
         {

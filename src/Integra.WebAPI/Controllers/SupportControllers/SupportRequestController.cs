@@ -1,10 +1,15 @@
 ﻿using MediatR;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Integra.WebApi.Models;
 using Integra.Persistence;
 using Integra.Application.SupportRequests.Commands;
-using Microsoft.AspNetCore.Authorization;
+
+using Integra.Domain.Support;
+using Integra.Persistence.Solman;
+using SolutionManagerApi;
+using NLog;
 
 namespace Integra.WebApi.Controllers.Controllers;
 
@@ -12,8 +17,15 @@ namespace Integra.WebApi.Controllers.Controllers;
 public class SupportRequestController : BaseController
 {
     private readonly IMapper _mapper;
-    
-    public SupportRequestController(IMapper mapper) => _mapper = mapper;
+    private readonly IIncidentManager _incidentManager;
+    private readonly NLog.ILogger _logger;
+
+    public SupportRequestController(IMapper mapper, IIncidentManager manager)
+    {
+        _mapper = mapper;
+        _incidentManager = manager;
+        _logger = LogManager.GetCurrentClassLogger();
+    }
 
     [HttpGet]
     public async Task<ActionResult<string>> Get()
@@ -24,9 +36,38 @@ public class SupportRequestController : BaseController
     [HttpPost]
     public async Task<ActionResult<int>> Create([FromBody] CreateSupportRequestDto createSupportRequestDto)
     {
-        var command = _mapper.Map<CreateSupportRequestCommand>(createSupportRequestDto);
-        var supportRequestId = await Mediator.Send(command);
-        return Ok(supportRequestId);
+        try
+        {
+            var command = _mapper.Map<CreateSupportRequestCommand>(createSupportRequestDto);
+            var supportRequestId = await Mediator.Send(command);
+            return Ok(supportRequestId);
+        }
+        catch(Exception ex)
+        {
+            _logger.Error(ex.Message + " : " + ex.StackTrace);
+        }
+
+        return StatusCode(500);
         
     }
+
+    [HttpPost]
+    [Route("api/[controller]/[action]")]
+    public async Task<ActionResult<int>> CreateIncident([FromBody] SupportRequest request)
+    {
+        try
+        {
+            string id = await _incidentManager.CreateIncidentAsync(request);
+            return Ok(id);
+        }
+        catch (Exception ex)
+        {
+            _logger.Error(ex.Message + " : " + ex.StackTrace);
+        }
+
+        return StatusCode(500);
+
+    }
+
+
 }

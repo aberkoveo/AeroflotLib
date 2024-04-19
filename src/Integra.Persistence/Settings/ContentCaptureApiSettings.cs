@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Integra.Persistence.Settings
 {
-    public class ApiSettingsModel
+    public class ContentCaptureApiSettings
     {
         public string DBConnectionString { get; set; }
 

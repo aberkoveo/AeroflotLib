@@ -5,7 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Integra.Persistence.Settings;
 using Microsoft.Extensions.Options;
 using Integra.Persistence.FileSystem;
-using Integra.Persistence.ContentCapture;
+using Integra.Persistence.ContentCapture.Web;
+using Integra.Persistence.Solman;
 
 namespace Integra.Persistence;
 
@@ -24,6 +25,7 @@ public static class DependencyInjection
             provider.GetService<SupportRequestDBContext>());
 
         services.AddScoped<IBatchManager, BatchManager>();
+        services.AddScoped<IIncidentManager, IncidentManager>();
 
         return services;
     }

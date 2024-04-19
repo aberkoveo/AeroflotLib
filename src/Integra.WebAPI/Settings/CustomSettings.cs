@@ -7,7 +7,7 @@ namespace Integra.WebAPI.Settings
         public static IServiceCollection AddApiSettings(
     this IServiceCollection services, IConfiguration configuration)
         {
-            services.Configure<ApiSettingsModel>(configuration.GetSection("ApiSettings"));
+            services.Configure<ContentCaptureApiSettings>(configuration.GetSection("ApiSettings"));
 
             return services;
         }

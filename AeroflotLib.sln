@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Integra.Persistence", "src\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integra.Client", "Integra.Client\Integra.Client.csproj", "{F39516F8-FAA0-467C-9660-83A3D29930B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestsIntegra", "TestsIntegra\TestsIntegra.csproj", "{CB3CAB30-446B-432A-BF04-8499F70B9094}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestsIntegra", "TestsIntegra\TestsIntegra.csproj", "{CB3CAB30-446B-432A-BF04-8499F70B9094}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

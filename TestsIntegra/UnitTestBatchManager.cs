@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Integra.Domain;
 using Integra.Domain.ContentCapture;
-using Integra.Persistence.ContentCapture;
+using Integra.Persistence.ContentCapture.Web;
 using Microsoft.Extensions.Options;
 using Moq;
 using Integra.Persistence.Settings;
@@ -13,20 +13,20 @@ using Integra.Persistence.Settings;
 namespace TestsIntegra
 {
     [TestClass]
-    public class UnitTestBatchManager
+    public class UnitTestIncidentManager
     {
-        private readonly IOptions<ApiSettingsModel> _settings;
+        private readonly IOptions<ContentCaptureApiSettings> _settings;
         private readonly ContentBatch _batch;
 
-        public UnitTestBatchManager()
+        public UnitTestIncidentManager()
         {
-            ApiSettingsModel settings = new ApiSettingsModel()
+            ContentCaptureApiSettings settings = new ContentCaptureApiSettings()
             {
                 ApplicationServerUrl = "http://192.168.194.92",
                 ImportFolderPath = "E:\\IntegraImportFolder"
             };
 
-            var optionsMock = new Mock<IOptions<ApiSettingsModel>>();
+            var optionsMock = new Mock<IOptions<ContentCaptureApiSettings>>();
             optionsMock.Setup(v => v.Value).Returns(settings);
             _settings = optionsMock.Object;
 

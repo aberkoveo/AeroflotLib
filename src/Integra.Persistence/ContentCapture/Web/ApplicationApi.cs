@@ -1,5 +1,5 @@
-﻿using ContentCaptureApi;
-//using Microsoft.Extensions.Logging;
+﻿
+using ContentCaptureApi;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -12,20 +12,19 @@ using NLog;
 using Integra.Persistence.Settings;
 
 
-namespace Integra.Persistence.ContentCapture
+namespace Integra.Persistence.ContentCapture.Web
 {
     public class ApplicationApi
     {
         protected ILogger Logger => LogManager.GetCurrentClassLogger();
 
         protected readonly FlexiCaptureWebServiceSoapClient _api;
-        protected readonly ApiSettingsModel _settings;
+        protected readonly ContentCaptureApiSettings _settings;
 
-        protected ApplicationApi(IOptions<ApiSettingsModel> settings)
+        protected ApplicationApi(IOptions<ContentCaptureApiSettings> settings)
         {
             _settings = settings.Value;
             _api = SetupApiClient();
-
         }
 
 

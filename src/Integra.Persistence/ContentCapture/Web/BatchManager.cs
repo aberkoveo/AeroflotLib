@@ -1,20 +1,12 @@
 ﻿using Integra.Persistence.Settings;
 using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.ServiceModel.Description;
-using System.Text;
-using System.Threading.Tasks;
-using Integra.Domain;
 using Integra.Domain.ContentCapture;
-using ABBYY.FlexiCapture;
 using ContentCaptureApi;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-
 using Integra.Persistence.FileSystem;
+using Integra.Persistence.Utils;
 
-namespace Integra.Persistence.ContentCapture
+
+namespace Integra.Persistence.ContentCapture.Web
 {
     public class BatchManager : ApplicationApi, IBatchManager
     {
@@ -45,30 +37,25 @@ namespace Integra.Persistence.ContentCapture
             _api.CloseSession(sessionId);
         }
 
-        public async Task<int> HandleBatchAsync(ContentBatch contentBatch)
+        public async Task<int> HandleBatchAsync(ContentBatch batchDto)
         {
-            var ccbatch = new Batch 
-            { 
-                Name = contentBatch.Name, 
-                OwnerId = contentBatch.OwnerId,
-                BatchTypeId = contentBatch.BatchTypeId
-            };
+            ContentCaptureApi.Batch ccbatch = BatchBuilder.BuildBatch(batchDto);
 
             try
             {
                 int sessionId = External_OpenSession();
 
-                int batchId = _api.AddNewBatch(sessionId, ProjectId, ccbatch, contentBatch.OwnerId);
+                int batchId = _api.AddNewBatch(sessionId, ProjectId, ccbatch, batchDto.OwnerId);
                 if (batchId <= 0) throw new Exception($"Couldn't create the batch {ccbatch.Name}");
 
                 _api.OpenBatch(sessionId, batchId);
 
-                string batchFolderPath = Path.Combine(_settings.ImportFolderPath, contentBatch.Name);
+                string batchFolderPath = Path.Combine(_settings.ImportFolderPath, batchDto.Name);
                 var batchBytes = await FilesReader.ReadFolderFilesAsync(batchFolderPath);
 
                 foreach (KeyValuePair<string, byte[]> item in batchBytes)
                 {
-                    var document = new ContentCaptureApi.Document {BatchId = batchId};
+                    var document = new Document { BatchId = batchId };
 
                     var documentFile = new ContentCaptureApi.File()
                     {
@@ -83,7 +70,7 @@ namespace Integra.Persistence.ContentCapture
                 }
 
                 _api.CloseBatch(sessionId, batchId);
-                
+
                 _api.ProcessBatch(sessionId, batchId);
 
                 _api.CloseSession(sessionId);
@@ -93,7 +80,7 @@ namespace Integra.Persistence.ContentCapture
                 return batchId;
             }
 
-            catch ( Exception ex)
+            catch (Exception ex)
             {
                 Logger.Error(ex.Message + ": " + ex.StackTrace);
             }
@@ -101,7 +88,7 @@ namespace Integra.Persistence.ContentCapture
             return default;
         }
 
-        public BatchManager(IOptions<ApiSettingsModel> settings) : base(settings)
+        public BatchManager(IOptions<ContentCaptureApiSettings> settings) : base(settings)
         {
             ProjectId = _settings.ProjectId;
         }

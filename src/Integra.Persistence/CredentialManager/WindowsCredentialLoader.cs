@@ -14,13 +14,13 @@ namespace Integra.Persistence.CredentialManager
     public class WindowsCredentialLoader : IWindowsCredentialLoader
     {
         private readonly ILogger _logger;
-        private readonly ApiSettingsModel _settings;
+        private readonly ContentCaptureApiSettings _settings;
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="settings">модель настроек для сервиса отправки уведомлений верификации</param>
-        public WindowsCredentialLoader(IOptions<ApiSettingsModel> settings)
+        public WindowsCredentialLoader(IOptions<ContentCaptureApiSettings> settings)
         {
             _logger = LogManager.GetLogger("VerifNotifyLogger");
             _settings = settings.Value;
