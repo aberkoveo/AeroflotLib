@@ -26,6 +26,7 @@ public class SupportRequest
     [NotMapped]
     public string BatchName { get; set; }
 
+    public string[] DocumentsIds { get; set; }
     public string BatchOwner { get; set; }
     public string Comment { get; set; }
     [NotMapped]
