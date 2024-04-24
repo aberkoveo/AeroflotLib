@@ -13,12 +13,12 @@ logger.Info("Запуск сервиса интеграции");
 try
 {
     var builder = WebApplication.CreateBuilder(args);
-    
+
     // Configure logging
-    builder.Logging.ClearProviders();
+    //builder.Logging.ClearProviders();
     builder.Host.UseNLog();
     // Add services to the container.
-    
+
     builder.Services.AddAutoMapper(config =>
     {
         config.AddProfile(new AssemblyMappingProfile(Assembly.GetExecutingAssembly()));
@@ -36,12 +36,12 @@ try
 
     var app = builder.Build();
     
-    using (var scope = app.Services.CreateScope())
-    {
-        var serviceProvider = scope.ServiceProvider;
-        var context = serviceProvider.GetRequiredService<SupportRequestDBContext>();
-        DbInitializer.Initialize(context);
-    }
+    //using (var scope = app.Services.CreateScope())
+    //{
+    //    var serviceProvider = scope.ServiceProvider;
+    //    var context = serviceProvider.GetRequiredService<SupportRequestDBContext>();
+    //    DbInitializer.Initialize(context);
+    //}
     
     //if (app.Environment.IsDevelopment())
     //{
@@ -58,7 +58,7 @@ try
 }
 catch (Exception exception)
 {
-    logger.Error(exception, "Остановка программы из-за исключения");
+    logger.Error(exception, exception.StackTrace);
 }
 finally
 {

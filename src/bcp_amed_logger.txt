@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <nlog xmlns="http://www.nlog-project.org/schemas/Nlog.xsd"
 	  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	  autoReload="true">
@@ -7,19 +7,13 @@
 				xsi:type="File"
 				archiveNumbering="Date"
 				archiveAboveSize="10000000"
-				fileName="Logs\Solman.log"
+				fileName="Logs\ADSync.log"
 				layout="${date:format=dd-MM-yyyy HH-mm-ss} | ${level:uppercase=true} | ${callsite} | ${message}"/>
 		<target name="ContentCapturelogfile"
 				xsi:type="File"
 				archiveNumbering="Date"
 				archiveAboveSize="10000000"
-				fileName="Logs\ContentCapture.log"
-				layout="${date:format=dd-MM-yyyy HH-mm-ss} | ${level:uppercase=true} | ${callsite} | ${message}"/>
-		<target name="Commonlogfile"
-				xsi:type="File"
-				archiveNumbering="Date"
-				archiveAboveSize="10000000"
-				fileName="Logs\Common.log"
+				fileName="Logs\VerifNotify.log"
 				layout="${date:format=dd-MM-yyyy HH-mm-ss} | ${level:uppercase=true} | ${callsite} | ${message}"/>
 		<target name="logconsole"
 				xsi:type="Console"
@@ -30,8 +24,5 @@
 		<logger name="SolmanLogger" minlevel="Debug" writeTo="Solmanlogfile"/>
 		<logger name="ContentCaptureLogger" minlevel="Debug" writeTo="ContentCapturelogfile"/>
 		<logger name="*" minlevel="Debug" writeTo="logconsole"/>
-		<logger name="Microsoft*" minlevel="Debug" writeTo="Commonlogfile"/>
-		<logger name="Program*" minlevel="Debug" writeTo="Commonlogfile"/>
-		
 	</rules>
 </nlog>

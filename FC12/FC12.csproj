@@ -72,7 +72,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="SupportExtensions\Models\SupportRequest.cs" />
-    <Compile Include="SupportExtensions\Outlook\Mail.cs" />
+    <Compile Include="SupportExtensions\Outlook\SupportData.cs" />
     <Compile Include="SupportExtensions\Outlook\MessageBuilder.cs" />
     <Compile Include="SupportExtensions\SupportMessageForm.cs">
       <SubType>Form</SubType>

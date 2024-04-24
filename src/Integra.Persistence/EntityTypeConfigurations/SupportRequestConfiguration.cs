@@ -17,5 +17,6 @@ public class SupportRequestConfiguration : IEntityTypeConfiguration<SupportReque
         builder.Property(request => request.BatchOwner).HasMaxLength(50);
         builder.Property(request => request.Categories);
         builder.Property(request => request.Comment);
+        builder.Property(request => request.DocumentsIds).HasMaxLength(50);
     }
 }

@@ -10,8 +10,9 @@ using Integra.Domain.Support;
 using Integra.Persistence.Solman;
 using SolutionManagerApi;
 using NLog;
+using Integra.Persistence.Utils;
 
-namespace Integra.WebApi.Controllers.Controllers;
+namespace Integra.WebApi.Controllers.SupportControllers;
 
 [Route("api/[controller]")]
 public class SupportRequestController : BaseController
@@ -24,7 +25,8 @@ public class SupportRequestController : BaseController
     {
         _mapper = mapper;
         _incidentManager = manager;
-        _logger = LogManager.GetCurrentClassLogger();
+        _logger = LogManager.GetLogger("SolmanLogger");
+        //_logger = LogManager.GetCurrentClassLogger();
     }
 
     [HttpGet]
@@ -52,13 +54,21 @@ public class SupportRequestController : BaseController
     }
 
     [HttpPost]
-    [Route("api/[controller]/[action]")]
+    [Route("[action]")]
     public async Task<ActionResult<int>> CreateIncident([FromBody] SupportRequest request)
     {
         try
         {
             string id = await _incidentManager.CreateIncidentAsync(request);
+
+            if (id is null)
+            {
+                _logger.Error("Bad request:\n" + JsonWriter.ConvertObject(request));
+                throw new Exception("Создание инцидента в Solman не выполнено! ID = null");
+            }
+
             return Ok(id);
+
         }
         catch (Exception ex)
         {

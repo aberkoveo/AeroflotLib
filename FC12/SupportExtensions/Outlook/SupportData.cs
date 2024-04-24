@@ -8,7 +8,7 @@ namespace FC12.SupportExtensions.Outlook
 {
     public static class SupportData
     {
-        public static string Subject { get; } = "Запрос в техподдержку ПСК;";
+        public static string Subject = "Запрос в техподдержку ПСК;";
 
         public static string[] Body = new string[]
         {
@@ -21,7 +21,10 @@ namespace FC12.SupportExtensions.Outlook
             "<br>Имя пакета: {3}</br>",
             "<br></br>",
             "<br>Комментарий:</br>",
-            "<br>{4}</br>"
+            "<br>{4}</br>",
+            "<br></br>",
+            "<br>Инцидент Solution Manager:</br>",
+            "<br>{5}</br>"
         };
 
         

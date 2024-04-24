@@ -18,7 +18,7 @@ namespace FC12.SupportExtensions.Outlook
         private readonly OutlookInterop.MailItem _mailItem;
         private readonly OutlookInterop.Application _emailApp = new OutlookInterop.Application();
 
-        public MessageBuilder(SupportRequest request)
+        public MessageBuilder(SupportRequestDto request)
         {
             _emailApp = new OutlookInterop.Application();
             _mailItem = _emailApp.CreateItem(OutlookInterop.OlItemType.olMailItem) as OutlookInterop.MailItem;
@@ -30,17 +30,18 @@ namespace FC12.SupportExtensions.Outlook
 
         public OutlookInterop.MailItem GetMailItem() => _mailItem;
 
-        private void BuildMessageBody(SupportRequest request)
+        private void BuildMessageBody(SupportRequestDto request)
         {
             string bodyText = GetBody();
             string categoriesText = request.Categories;
             _mailItem.BodyFormat = OutlookInterop.OlBodyFormat.olFormatHTML;
             _mailItem.HTMLBody = String.Format(bodyText,
                 categoriesText, 
-                request.BatchId, 
-                String.Join(",", request.DocumentsIds), 
+                request.BatchId,
+                request.DocumentsIds, 
                 request.BatchName, 
-                request.Comment);
+                request.Comment,
+                request.SMID);
         }
 
         private string GetBody()

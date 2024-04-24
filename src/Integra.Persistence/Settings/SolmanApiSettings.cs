@@ -14,10 +14,17 @@ namespace Integra.Persistence.Settings
 
         public string ServicePassword { get; set; }
 
+//#warning ТЕХДОЛГ!! Добавить Автора инцидента
         public int IncidentAuthorId { get; set; }
 
-        public int IncidentExecutorId { get; set; }
+        //public int IncidentExecutorId { get; set; }
 
         public string IncidentRequesterGuid { get; set; } 
+
+        public string SAPProcessType { get; set; }
+
+        public string SAPMultiLevelCategoryID { get;set; } //Функцкиональное направление
+
+        public string SapSolutionType { get; set; }
     }
 }

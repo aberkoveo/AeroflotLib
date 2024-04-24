@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Integra.Domain.Support;
 using Integra.Persistence.Settings;
+using Integra.Persistence.Utils;
 using Microsoft.Extensions.Options;
 using SolutionManagerApi;
 
@@ -53,7 +54,11 @@ namespace Integra.Persistence.Solman
         {
             try
             {
+                
+
                 ProcessIncident obj = await BuildProcessIncidentAsync(request);
+
+                Logger.Debug("ProcessIncident object: \n" + JsonWriter.ConvertObject(obj));
 
                 ProcessIncidentResponse1 response = await _api.ProcessIncidentAsync(obj);
 
@@ -96,12 +101,40 @@ namespace Integra.Persistence.Solman
                         TextType = "SU99",
                         Texts = new string[]
                         {
-                            request.Comment
+                            "Имя пользователя: " + request.BatchOwner,
+                            "Категории: " + request.Categories,
+                            "Идентификатор пакета: " + request.BatchId,
+                            "Имя пакета: " + request.BatchName,
+                            "Идентификаторы документов: " + request.DocumentsIds,
+                            "Комментарий: " + request.Comment
                         },
                         Language = "RU"
                     }
-                }
+                },
+                IctAdditionalInfos = new IctIncidentAdditionalInfo[]
+                {
+                    new IctIncidentAdditionalInfo()
+                    {
+                        AddInfoAttribute = "SAPMultiLevelCategoryID",
+                        AddInfoValue = _settings.SAPMultiLevelCategoryID
+                    },
+                    new IctIncidentAdditionalInfo()
+                    {
+                        AddInfoAttribute = "SAPProcessType",
+                        AddInfoValue = _settings.SAPProcessType
+                    },
+                    new IctIncidentAdditionalInfo()
+                    {
+                        AddInfoAttribute = "SapSolutionType",
+                        AddInfoValue = _settings.SapSolutionType
+                    }
 
+                },
+                IctAttachments = new IctIncidentAttachment[] { },
+                IctPersons = new IctIncidentPerson[] { },
+                IctSapNotes = new IctIncidentSapNote[] { },
+                IctSolutions = new IctIncidentSolution[] { },
+                IctUrls = new IctIncidentUrl[] { }
             };
         }
     }

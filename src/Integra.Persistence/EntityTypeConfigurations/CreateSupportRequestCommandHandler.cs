@@ -19,7 +19,8 @@ public class CreateSupportRequestCommandHandle
             BatchId = request.BatchId,
             BatchOwner = request.BatchOwner,
             Comment = request.Comment,
-            Categories= request.Categories,
+            Categories = request.Categories,
+            DocumentsIds = request.DocumentsIds
         };
 
         await _dbContext.SupportRequests.AddAsync(supportRequest, cancellationToken);

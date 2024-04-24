@@ -16,7 +16,7 @@ public static class DependencyInjection
         , IConfiguration configuration)
     {
         var connectionString = configuration
-            .GetSection("ApiSettings")
+            .GetSection("ContentCaptureApiSettings")
             .GetSection("DBConnectionString").Value;
 
         services.AddDbContext<SupportRequestDBContext>(opts => { opts.UseSqlServer(connectionString); });

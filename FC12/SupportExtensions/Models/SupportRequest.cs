@@ -11,16 +11,16 @@ using Microsoft.Office.Interop.Outlook;
 
 namespace FC12.SupportExtensions.Models
 {
-    public class SupportRequest
+    public class SupportRequestDto
     {
         //[DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID { get; set; }
         public int SMID { get; set; }
-        private readonly string _subject = SupportData.Subject;
+
         public readonly string CreationDate;
         public string Subject
         {
-            get { return $"{_subject} Приоритет: {(int)RequestPriority}" ; }
+            get { return $"{SupportData.Subject} Приоритет: {(int)RequestPriority}" ; }
         } 
         public RequestPriority RequestPriority { get; set; }
         public string Recipient { get; set; }
@@ -31,9 +31,9 @@ namespace FC12.SupportExtensions.Models
         public string BatchOwner { get; set; }
         private CustomList<string> _categories { get; set; } = new CustomList<string>();
 
-        public string Comment { get; set; }
+        public string Comment { get; set; } = "";
 
-        public string[] DocumentsIds { get; set; }
+        public string DocumentsIds { get; set; } 
 
         public bool IsValid()
         {
@@ -69,7 +69,7 @@ namespace FC12.SupportExtensions.Models
 
 
 
-        public SupportRequest()
+        public SupportRequestDto()
         {
             CreationDate = DateTime.Now.ToString("dd.MM.yyyy HH:mm");
         }
@@ -95,10 +95,10 @@ namespace FC12.SupportExtensions.Models
     
     public enum RequestPriority : ushort
     {
-        Low = 0, 
-        Medium = 1, 
+        Low = 4, 
+        Medium = 3, 
         High = 2,
-        Urgent = 3,
+        Urgent = 1,
     }
 
 

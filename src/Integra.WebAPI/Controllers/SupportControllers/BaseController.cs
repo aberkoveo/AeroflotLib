@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using MediatR;
 
-namespace Integra.WebApi.Controllers.Controllers;
+namespace Integra.WebApi.Controllers.SupportControllers;
 
 [ApiController]
 public abstract class BaseController : ControllerBase

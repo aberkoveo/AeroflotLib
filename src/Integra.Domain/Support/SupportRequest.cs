@@ -6,7 +6,6 @@ namespace Integra.Domain.Support;
 
 public class SupportRequest
 {
-    private readonly string _subject;
     private CustomList<string> _categories { get; set; } = new CustomList<string>();
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -14,7 +13,7 @@ public class SupportRequest
     public int SMID { get; set; }
     public readonly string CreationDate;
     [NotMapped]
-    public string Subject => $"{_subject} Приоритет: {(int)Priority}";
+    public string Subject { get; set; }
     public Priority Priority { get; set; }
     [NotMapped]
     public string Recipient { get; set; }
@@ -26,7 +25,8 @@ public class SupportRequest
     [NotMapped]
     public string BatchName { get; set; }
 
-    public string[] DocumentsIds { get; set; }
+    public string DocumentsIds { get; set; }
+
     public string BatchOwner { get; set; }
     public string Comment { get; set; }
     [NotMapped]

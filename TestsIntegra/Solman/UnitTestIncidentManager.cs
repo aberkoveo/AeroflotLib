@@ -45,5 +45,7 @@ namespace TestsIntegra.Solman
 
             Assert.AreEqual( 32, guid.Length );
         }
+
+        
     }
 }

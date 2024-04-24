@@ -9,14 +9,16 @@ using Integra.Domain.ContentCapture;
 using NLog;
 using Integra.Persistence.ContentCapture.Web;
 using Integra.WebApi.Utils;
+using ILogger = NLog.ILogger;
 
-namespace Integra.WebApi.Controllers.Controllers;
+namespace Integra.WebApi.Controllers.ContentCapture;
 
 [Route("api/[controller]")]
-public class ContentCaptureApiController : BaseController
+public class ContentCaptureApiController : ControllerBase
 {
     private readonly IServiceProvider _serviceProvider;
-    private readonly NLog.ILogger _logger = LogManager.GetCurrentClassLogger();
+    private readonly NLog.ILogger _logger = LogManager.GetLogger("ContentCaptureLogger");
+    //private ILogger _logger => LogManager.GetCurrentClassLogger();
 
     public ContentCaptureApiController(IServiceProvider provider)
     {

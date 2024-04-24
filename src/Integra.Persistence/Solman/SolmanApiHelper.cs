@@ -14,6 +14,7 @@ using Integra.Persistence.Settings;
 using SolutionManagerApi;
 using Microsoft.Extensions.Options;
 using NLog;
+using ILogger = NLog.ILogger;
 
 namespace Integra.Persistence.Solman
 {
@@ -21,7 +22,8 @@ namespace Integra.Persistence.Solman
     {
 
         protected readonly CT_SERVICE_DESK_APIClient _api;
-        protected ILogger Logger => LogManager.GetCurrentClassLogger();
+        protected ILogger Logger => LogManager.GetLogger("SolmanLogger");
+        //protected ILogger Logger => LogManager.GetCurrentClassLogger();
         protected readonly SolmanApiSettings _settings;
 
         public SolmanApiHelper(IOptions<SolmanApiSettings> settings)

@@ -16,7 +16,7 @@ namespace Tests
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new SupportMessageForm(GlobalUsing.TestingRequest2, null, true));
+            Application.Run(new SupportMessageForm(GlobalUsing.TestingRequest3, null, true));
         }
 
         [TestMethod]
@@ -28,6 +28,18 @@ namespace Tests
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new SupportMessageForm(GlobalUsing.TestingRequest2));
 
+        }
+
+        [TestMethod]
+        [STAThread]
+        public void TestWindowsFormWithExecuteReq()
+        {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(
+                new SupportMessageForm(
+                    GlobalUsing.TestingRequest3, 
+                    GlobalUsing.commonSupportClient));
         }
 
 

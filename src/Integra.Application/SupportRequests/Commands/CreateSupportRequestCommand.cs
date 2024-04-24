@@ -11,4 +11,5 @@ public class CreateSupportRequestCommand : IRequest<int>
     public string BatchOwner { get; set; }
     public string Categories { get; set; }
     public string Comment { get; set; }
+    public string DocumentsIds { get; set; }
 }

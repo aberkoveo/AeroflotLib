@@ -14,7 +14,7 @@ namespace FC12.SupportExtensions.Outlook
     {
 
         
-        public static void CreateEmailSample(SupportRequest request)
+        public static void CreateEmailSample(SupportRequestDto request)
         {
             MessageBuilder builder = new MessageBuilder(request);
             OutlookInterop.MailItem emailSample = builder.GetMailItem();

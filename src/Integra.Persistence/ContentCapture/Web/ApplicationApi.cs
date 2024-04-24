@@ -9,6 +9,7 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using NLog;
+using ILogger = NLog.ILogger;
 using Integra.Persistence.Settings;
 
 
@@ -16,7 +17,8 @@ namespace Integra.Persistence.ContentCapture.Web
 {
     public class ApplicationApi
     {
-        protected ILogger Logger => LogManager.GetCurrentClassLogger();
+        protected ILogger Logger => LogManager.GetLogger("ContentCaptureLogger");
+        //protected ILogger Logger => LogManager.GetCurrentClassLogger();
 
         protected readonly FlexiCaptureWebServiceSoapClient _api;
         protected readonly ContentCaptureApiSettings _settings;

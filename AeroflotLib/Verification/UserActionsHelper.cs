@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ABBYY.FlexiCapture;
 using System.Net.Http;
-using FC12.SupportExtensions.Models;
+using SupportRequestDto = FC12.SupportExtensions.Models.SupportRequestDto;
 using FC12.SupportExtensions;
 using Integra.Client;
 
@@ -17,15 +17,27 @@ namespace AeroflotLib.Verification
 {
     public static class UserActionsHelper
     {
-        public static void ExecuteSupportRequest(IBatch batch, string[] documentsIds)
+        public static void ExecuteSupportRequest(IBatch batch, string documentsIds, string userName)
         {
-            string intgraURL = batch.Project.EnvironmentVariables.Get("IntegraURL");
-            IntegraClient integraClient = new IntegraClient(intgraURL, new HttpClient());
+            try
+            {
+                string intgraURL = batch.Project.EnvironmentVariables.Get("IntegraURL");
+                SupportRequestClient SupportRequestClient = new SupportRequestClient(intgraURL, new HttpClient());
 
-            SupportRequest request = SupportRequestBuilder.SupportRequestBuild(batch, documentsIds);
+                SupportRequestDto request = SupportRequestBuilder.SupportRequestBuild(
+                    batch, documentsIds, userName);
 
-            Application.EnableVisualStyles();
-            Application.Run(new SupportMessageForm(request, integraClient));
+                Application.EnableVisualStyles();
+                Application.Run(new SupportMessageForm(request, SupportRequestClient));
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + " : " + ex.StackTrace);
+            }
+            
+
+
         }
     }
 }

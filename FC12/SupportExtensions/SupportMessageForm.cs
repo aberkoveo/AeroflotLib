@@ -17,16 +17,17 @@ using FC12.SupportExtensions.Outlook;
 using System.Runtime.CompilerServices;
 using Integra.Client;
 
+using SupportRequestDto = FC12.SupportExtensions.Models.SupportRequestDto;
 
 namespace FC12.SupportExtensions
 {
     public partial class SupportMessageForm : Form
     {
-        private static SupportRequest Request { get; set; }
-        private static IntegraClient _integraClient;
+        private static SupportRequestDto Request { get; set; }
+        private static SupportRequestClient _integraClient;
         private readonly bool DebugState;
 
-        public SupportMessageForm(SupportRequest request, IntegraClient integraClient = null, bool debug = false)
+        public SupportMessageForm(SupportRequestDto request, SupportRequestClient integraClient = null, bool debug = false)
         {
             Request = request;
             DebugState = debug;
@@ -41,11 +42,12 @@ namespace FC12.SupportExtensions
             MessageBox.Show(SupportRequestJson);
         } 
 
-        private void SendRun()
+        private async Task SendRunAsync()
         {
             
+            
+            await ExecuteIntegraRequestAsync();
             OutlookHelper.CreateEmailSample(Request);
-            ExecuteIntegraRequest();
             this.Close();
         }
 
@@ -113,7 +115,7 @@ namespace FC12.SupportExtensions
         }
 
         #endregion
-        private void SendButton_Click(object sender, EventArgs e)
+        private async void SendButton_Click(object sender, EventArgs e)
         {
             if (Request.IsValid())
             {
@@ -132,12 +134,30 @@ namespace FC12.SupportExtensions
             }
             else
             {
-                SendRun(); 
+                await SendRunAsync(); 
             }
         }
 
-        private static void ExecuteIntegraRequest()
+        private async static Task ExecuteIntegraRequestAsync()
         {
+            SupportRequest dto = new SupportRequest()
+            {
+                Subject = Request.Subject,
+                BatchId = Request.BatchId,
+                BatchName = Request.BatchName,
+                BatchOwner = Request.BatchOwner,
+                Categories = Request.Categories,
+                CC = Request.CC,
+                Comment = Request.Comment,
+                ID = Request.ID,
+                Recipient = Request.Recipient,
+                CreationDate = DateTime.Now.ToString("dd-MM-yyyy HH-mm-ss"),
+                DocumentsIds  = Request.DocumentsIds,
+                Priority = (Priority)(int)Request.RequestPriority,
+            };
+
+            Request.SMID = await _integraClient.CreateIncidentAsync(dto);
+
             CreateSupportRequestDto requestDto = new CreateSupportRequestDto()
             {
                 BatchId = Request.BatchId,
@@ -145,11 +165,11 @@ namespace FC12.SupportExtensions
                 Categories = Request.Categories,
                 Comment = Request.Comment,
                 Priority = (Priority)Request.RequestPriority,
-                Smid = Request.SMID
+                SMID = Request.SMID
+                
             };
 
-
-            _integraClient.SupportRequestPOSTAsync(requestDto);
+            int id = await _integraClient.CreateAsync(requestDto);
         }
     }
 }
