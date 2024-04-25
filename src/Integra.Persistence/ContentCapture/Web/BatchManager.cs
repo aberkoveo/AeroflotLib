@@ -8,6 +8,11 @@ using Integra.Persistence.Utils;
 
 namespace Integra.Persistence.ContentCapture.Web
 {
+
+    /// <summary>
+    /// Реализует функцию загрузки пакетов с документами, образами документов
+    /// в систему ContentCapture и запускает пакеты в обработку
+    /// </summary>
     public class BatchManager : ApplicationApi, IBatchManager
     {
         private int RoleTypeId = 12; // External user (see API documentation)

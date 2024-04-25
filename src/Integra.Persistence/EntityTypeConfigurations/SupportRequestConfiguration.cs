@@ -4,6 +4,10 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Integra.Persistence.EntityTypeConfigurations;
 
+
+/// <summary>
+/// Ручная конфигурация EntityType для таблицы SupportRequests
+/// </summary>
 public class SupportRequestConfiguration : IEntityTypeConfiguration<SupportRequest>
 {
     public void Configure(EntityTypeBuilder<SupportRequest> builder)

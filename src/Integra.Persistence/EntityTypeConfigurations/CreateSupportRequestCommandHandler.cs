@@ -4,6 +4,11 @@ using Integra.Domain.Support;
 
 namespace Integra.Application.SupportRequests.Commands;
 
+
+/// <summary>
+/// Тип реализует обработчик для команды создания записи SupportRequest в СУБД.
+/// СМ. документацию MediatR.
+/// </summary>
 public class CreateSupportRequestCommandHandle
     : IRequestHandler<CreateSupportRequestCommand, int>
 {

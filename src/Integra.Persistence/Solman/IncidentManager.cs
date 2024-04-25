@@ -11,6 +11,10 @@ using SolutionManagerApi;
 
 namespace Integra.Persistence.Solman
 {
+
+    /// <summary>
+    /// Тип реализует функционал по созданию инцидентов в Solman через его API
+    /// </summary>
     public class IncidentManager : SolmanApiHelper, IIncidentManager
     {
         public IncidentManager(IOptions<SolmanApiSettings> settings) : base(settings) { }

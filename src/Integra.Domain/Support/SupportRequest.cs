@@ -4,6 +4,10 @@ using static System.String;
 
 namespace Integra.Domain.Support;
 
+/// <summary>
+/// Класс реализует основную единицу передачи информации
+/// в интеграции с API SolutionManager
+/// </summary>
 public class SupportRequest
 {
     private CustomList<string> _categories { get; set; } = new CustomList<string>();

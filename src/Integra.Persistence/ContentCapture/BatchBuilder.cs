@@ -11,6 +11,12 @@ using ContentCaptureApi;
 
 namespace Integra.Persistence.ContentCapture
 {
+
+    /// <summary>
+    /// Формирует пакеты обработки из объектной модели API ContentCapture
+    /// на базе передаваемых типов в Integra и добавляет регистрационные 
+    /// параметры к ним.
+    /// </summary>
     public static class BatchBuilder
     {
         public static Batch BuildBatch(ContentBatch dto)

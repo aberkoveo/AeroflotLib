@@ -8,6 +8,11 @@ using NLog;
 
 namespace Integra.Persistence.FileSystem
 {
+
+    /// <summary>
+    /// Читает все файлы из каталога по переданному пути.
+    /// </summary>
+    /// <returns>Словарь с ключом=имени файла, значением=массиву байт прочитанного файла</returns>
     public static class FilesReader
     {
 

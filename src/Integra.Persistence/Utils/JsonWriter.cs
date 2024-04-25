@@ -10,6 +10,7 @@ using System.Text.Encodings.Web;
 
 namespace Integra.Persistence.Utils
 {
+
     public static class JsonWriter
     {
         /// <summary>

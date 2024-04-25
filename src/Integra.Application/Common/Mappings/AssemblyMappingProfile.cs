@@ -3,6 +3,10 @@ using AutoMapper;
 
 namespace Integra.Application.Common.Mappings;
 
+/// <summary>
+/// Тип создает профили для AutoMApper на основе заданных типов.
+/// Нужно для автоматического маппинга классов.
+/// </summary>
 public class AssemblyMappingProfile : Profile
 {
     public AssemblyMappingProfile(Assembly assembly)

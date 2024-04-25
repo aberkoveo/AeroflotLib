@@ -26,7 +26,6 @@ public class SupportRequestController : BaseController
         _mapper = mapper;
         _incidentManager = manager;
         _logger = LogManager.GetLogger("SolmanLogger");
-        //_logger = LogManager.GetCurrentClassLogger();
     }
 
     [HttpGet]

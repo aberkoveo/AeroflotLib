@@ -23,7 +23,8 @@ internal class CreateSupportRequestCommandHandler : IRequestHandler<CreateSuppor
             BatchId = request.BatchId,
             BatchOwner = request.BatchOwner,
             Categories = request.Categories,
-            Comment = request.Comment
+            Comment = request.Comment,
+            DocumentsIds = request.DocumentsIds
         };
         await _dbContext.SupportRequests.AddAsync(supportRequest);
         await _dbContext.SaveChangesAsync(cancellationToken);

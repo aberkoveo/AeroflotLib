@@ -2,6 +2,11 @@
 
 namespace Integra.WebAPI.Settings
 {
+
+    /// <summary>
+    /// Добавление дополнительных конфигураций для прикладных сервисов
+    /// из appsettings
+    /// </summary>
     public static class CustomSettings
     {
         public static IServiceCollection AddApiSettings(

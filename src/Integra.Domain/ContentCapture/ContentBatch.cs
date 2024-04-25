@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Integra.Domain.ContentCapture
 {
+    /// <summary>
+    /// Класс реализует основную единицу передачи информации
+    /// в интеграции с API ContentCapture
+    /// </summary>
     [Serializable]
     public class ContentBatch
     {

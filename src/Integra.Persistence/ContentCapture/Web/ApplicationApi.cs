@@ -15,11 +15,12 @@ using Integra.Persistence.Settings;
 
 namespace Integra.Persistence.ContentCapture.Web
 {
+    /// <summary>
+    /// Тип реализует подключение к API ContentCapture.
+    /// </summary>
     public class ApplicationApi
     {
         protected ILogger Logger => LogManager.GetLogger("ContentCaptureLogger");
-        //protected ILogger Logger => LogManager.GetCurrentClassLogger();
-
         protected readonly FlexiCaptureWebServiceSoapClient _api;
         protected readonly ContentCaptureApiSettings _settings;
 
@@ -59,7 +60,6 @@ namespace Integra.Persistence.ContentCapture.Web
         /// корректной работы необходмы права администратора ContentCapture
         /// </summary>
         /// <param name="api">Клиент сервиса управления Сервером приложений</param>
-        /// <exception cref="UserAccessException"></exception>
         private void TestApiUserAccess(FlexiCaptureWebServiceSoapClient api)
         {
             string me = WindowsIdentity.GetCurrent().Name;

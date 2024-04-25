@@ -18,7 +18,6 @@ public class ContentCaptureApiController : ControllerBase
 {
     private readonly IServiceProvider _serviceProvider;
     private readonly NLog.ILogger _logger = LogManager.GetLogger("ContentCaptureLogger");
-    //private ILogger _logger => LogManager.GetCurrentClassLogger();
 
     public ContentCaptureApiController(IServiceProvider provider)
     {

@@ -5,6 +5,9 @@ using Integra.Domain.Support;
 
 namespace Integra.WebApi.Models;
 
+/// <summary>
+/// Добавляет профиль для AutoMapper
+/// </summary>
 public class CreateSupportRequestDto : IMapWith<CreateSupportRequestCommand>
 {
     public int ID { get; set; }

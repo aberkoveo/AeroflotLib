@@ -3,6 +3,9 @@ using Integra.Domain.Support;
 
 namespace Integra.Application.SupportRequests.Commands;
 
+/// <summary>
+/// Тип позволяет создавать записи в соотв. СУБД
+/// </summary>
 public class CreateSupportRequestCommand : IRequest<int>
 {
     public int SMID { get; set; }

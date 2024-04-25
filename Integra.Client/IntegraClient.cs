@@ -18,6 +18,11 @@ namespace Integra.Client
 {
     using System = global::System;
 
+
+    /// <summary>
+    /// Клиент для работы с API вебсервиса Integra, 
+    /// который отвечает за интеграцию с API ContentCapture
+    /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.19.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ContentCaptureApiClient
     {
@@ -300,6 +305,11 @@ namespace Integra.Client
         }
     }
 
+
+    /// <summary>
+    /// Клиент для работы с API вебсервиса Integra, 
+    /// который отвечает за интеграцию с API SolutionManager
+    /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.19.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class SupportRequestClient
     {
