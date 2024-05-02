@@ -24,12 +24,24 @@ public class ContentCaptureApiController : ControllerBase
         _serviceProvider = provider;
     }
 
+
+    /// <summary>
+    /// Заголовочный метод контроллера
+    /// </summary>
+    /// <returns></returns>
     [HttpGet]
     public async Task<ActionResult<string>> Get()
     {
         return Ok("Сервис интеграции ContentCapture для создания и обработки пакетов документов");
     }
 
+
+    /// <summary>
+    /// Загружает образы документов создает в пакет и
+    /// запускает его в обработку ContentCapture
+    /// </summary>
+    /// <param name="batch"></param>
+    /// <returns></returns>
     [HttpPost]
     public async Task<ActionResult<int>> HandleBatch([FromBody] ContentBatch batch)
     {

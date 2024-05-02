@@ -28,15 +28,28 @@ public class SupportRequestController : BaseController
         _logger = LogManager.GetLogger("SolmanLogger");
     }
 
+
+    /// <summary>
+    /// Заголовочный метод контроллера
+    /// </summary>
+    /// <returns></returns>
     [HttpGet]
     public async Task<ActionResult<string>> Get()
     {
-        return Ok("Сервис интеграции ContentCapture");
+        return Ok("Сервис интеграции c Solman для создания инцидентов");
     }
 
+
+    /// <summary>
+    /// Выполняет запись инцидента в таблицу базы данных для ведения статистики
+    /// </summary>
+    /// <param name="createSupportRequestDto"></param>
+    /// <returns>Внутренний для таблицы ID инцидента, автоинкремент</returns>
     [HttpPost]
     public async Task<ActionResult<int>> Create([FromBody] CreateSupportRequestDto createSupportRequestDto)
     {
+        _logger.Info($"Создание записи по инциденту {createSupportRequestDto.SMID}");
+
         try
         {
             var command = _mapper.Map<CreateSupportRequestCommand>(createSupportRequestDto);
@@ -52,10 +65,19 @@ public class SupportRequestController : BaseController
         
     }
 
+
+    /// <summary>
+    /// Выполняет создание инцидента в Solution Manager
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns>Идентификатор инцидента в Solution Manager</returns>
     [HttpPost]
     [Route("[action]")]
     public async Task<ActionResult<int>> CreateIncident([FromBody] SupportRequest request)
     {
+        _logger.Info($"Запрос создания инцидента по пакету c ID={request.BatchId}");
+        _logger.Debug($"{JsonWriter.ConvertObject(request)}");
+
         try
         {
             string id = await _incidentManager.CreateIncidentAsync(request);
