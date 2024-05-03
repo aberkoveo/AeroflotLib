@@ -140,6 +140,7 @@ namespace FC12.SupportExtensions
 
         private async static Task ExecuteIntegraRequestAsync()
         {
+            
             SupportRequest dto = new SupportRequest()
             {
                 Subject = Request.Subject,
@@ -156,6 +157,7 @@ namespace FC12.SupportExtensions
                 Priority = (Priority)(int)Request.RequestPriority,
             };
 
+            //создает инцидент в solman
             Request.SMID = await _integraClient.CreateIncidentAsync(dto);
 
             CreateSupportRequestDto requestDto = new CreateSupportRequestDto()
@@ -169,6 +171,7 @@ namespace FC12.SupportExtensions
                 
             };
 
+            //создает запись в СУБД
             int id = await _integraClient.CreateAsync(requestDto);
         }
     }
