@@ -16,10 +16,18 @@ namespace Integra.WebAPI.Controllers.ContentCapture.Validation
 
             RuleFor(batch => batch.RegistrationParameters)
                 .Must(parameters => parameters.ContainsKey("Станция сканирования"))
-                .WithMessage("Не заполнен параметр \"Станция сканирования\"");
+                .WithMessage("Отсутствует параметр \"Станция сканирования\"");
 
             RuleFor(batch => batch.RegistrationParameters)
                 .Must(parameters => parameters.ContainsKey("Сканировщик"))
+                .WithMessage("Отсутствует параметр \"Сканировщик\"");
+
+            RuleFor(batch => batch.RegistrationParameters["Станция сканирования"])
+                .NotEmpty()
+                .WithMessage("Не заполнен параметр \"Станция сканирования\""); ;
+
+            RuleFor(batch => batch.RegistrationParameters["Сканировщик"])
+                .NotEmpty()
                 .WithMessage("Не заполнен параметр \"Сканировщик\"");
 
 
