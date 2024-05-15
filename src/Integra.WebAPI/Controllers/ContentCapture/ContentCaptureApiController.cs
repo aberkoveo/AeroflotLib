@@ -41,7 +41,7 @@ public class ContentCaptureApiController : ControllerBase
 
 
     /// <summary>
-    /// Загружает образы документов создает в пакет и
+    /// Загружает образы документов, создает пакет и
     /// запускает его в обработку ContentCapture
     /// </summary>
     /// <param name="batch"></param>
