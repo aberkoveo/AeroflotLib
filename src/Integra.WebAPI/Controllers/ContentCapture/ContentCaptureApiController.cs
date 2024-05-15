@@ -10,6 +10,8 @@ using NLog;
 using Integra.Persistence.ContentCapture.Web;
 using Integra.WebApi.Utils;
 using ILogger = NLog.ILogger;
+using Integra.WebApi.Controllers.ContentCapture.Validation;
+using FluentValidation;
 
 namespace Integra.WebApi.Controllers.ContentCapture;
 
@@ -17,11 +19,13 @@ namespace Integra.WebApi.Controllers.ContentCapture;
 public class ContentCaptureApiController : ControllerBase
 {
     private readonly IServiceProvider _serviceProvider;
+    private readonly IValidator<ContentBatch> _validator;
     private readonly NLog.ILogger _logger = LogManager.GetLogger("ContentCaptureLogger");
 
-    public ContentCaptureApiController(IServiceProvider provider)
+    public ContentCaptureApiController(IServiceProvider provider, IValidator<ContentBatch> validator)
     {
         _serviceProvider = provider;
+        _validator = validator;
     }
 
 
@@ -47,6 +51,20 @@ public class ContentCaptureApiController : ControllerBase
     {
         _logger.Info($"Получен запрос на обработку пакета {batch.Name}.");
         _logger.Debug(JsonWriter.ConvertObject(batch));
+
+        //Валидация входных данных
+        var validationResult = await _validator.ValidateAsync(batch);
+        
+        if (!validationResult.IsValid)
+        {
+            string errorMessage = $"Данные пакета {batch.Name} переданы неверно:";
+            foreach (var error in validationResult.Errors)
+            {
+                errorMessage += $"\r\n {error.PropertyName} : {error.ErrorMessage}";
+            }
+            _logger.Error(errorMessage);
+            return StatusCode(StatusCodes.Status400BadRequest, validationResult.Errors);
+        }
 
         using (var scope = _serviceProvider.CreateScope())
         {

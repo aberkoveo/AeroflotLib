@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using Integra.Domain.ContentCapture;
 
-namespace Integra.WebAPI.Controllers.ContentCapture.Validation
+namespace Integra.WebApi.Controllers.ContentCapture.Validation
 {
     public class ContentBatchValidator : AbstractValidator<ContentBatch>
     {
@@ -19,16 +19,10 @@ namespace Integra.WebAPI.Controllers.ContentCapture.Validation
                 .WithMessage("Отсутствует параметр \"Станция сканирования\"");
 
             RuleFor(batch => batch.RegistrationParameters)
-                .Must(parameters => parameters.ContainsKey("Сканировщик"))
+                .Must(parameters => parameters.ContainsKey("Сканировщик*"))
                 .WithMessage("Отсутствует параметр \"Сканировщик\"");
 
-            RuleFor(batch => batch.RegistrationParameters["Станция сканирования"])
-                .NotEmpty()
-                .WithMessage("Не заполнен параметр \"Станция сканирования\""); ;
-
-            RuleFor(batch => batch.RegistrationParameters["Сканировщик"])
-                .NotEmpty()
-                .WithMessage("Не заполнен параметр \"Сканировщик\"");
+            
 
 
         }

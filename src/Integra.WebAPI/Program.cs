@@ -6,6 +6,10 @@ using Integra.Persistence;
 using NLog;
 using NLog.Web;
 using Integra.WebAPI.Settings;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using Integra.WebApi.Controllers.ContentCapture.Validation;
+using Integra.Domain.ContentCapture;
 
 var logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
 logger.Info("Запуск сервиса интеграции");
@@ -30,7 +34,9 @@ try
     builder.Services.AddApplication();
     builder.Services.AddPersistence(builder.Configuration);
     builder.Services.AddControllers();
-    
+
+    builder.Services.AddScoped<IValidator<ContentBatch>, ContentBatchValidator>();
+
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
 
