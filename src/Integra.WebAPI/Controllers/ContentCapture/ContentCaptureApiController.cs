@@ -105,7 +105,7 @@ public class ContentCaptureApiController : ControllerBase
     public async Task<ActionResult<int>> HandleBatchV2([FromBody] ContentBatch batch)
     {
         _logger.Info($"Получен запрос на обработку пакета {batch.Name}.");
-        _logger.Debug(JsonWriter.ConvertObject(batch));
+        //_logger.Debug(JsonWriter.ConvertObject(batch));
 
 
         //Валидация входных данных
@@ -124,7 +124,7 @@ public class ContentCaptureApiController : ControllerBase
             {
                 var batchManager = scope.ServiceProvider.GetRequiredService<IBatchManager>();
 
-                int result = await batchManager.HandleBatchAsync(batch);
+                int result = await batchManager.HandleBatchBase64Async(batch);
 
                 if (result == 0)
                 {

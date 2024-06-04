@@ -106,7 +106,6 @@ namespace Integra.Persistence.ContentCapture.Web
 
                 _api.OpenBatch(sessionId, batchId);
 
-                //string batchFolderPath = Path.Combine(_settings.ImportFolderPath, batchDto.Name);
                 var batchBytes = await FilesReader.ReadFromBase64Async(batchDto.Base64DocumentFiles);
 
                 foreach (KeyValuePair<string, byte[]> item in batchBytes)
