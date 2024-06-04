@@ -37,6 +37,19 @@ namespace Integra.Persistence.FileSystem
             return result;
         }
 
+        public static async Task<Dictionary<string, byte[]>> ReadFromBase64Async(
+            Dictionary<string, string> base64Dictionary)
+        {
+            Dictionary<string, byte[]> result = new();
+
+            foreach (KeyValuePair<string, string> document in base64Dictionary)
+            {
+                result[document.Key] = Convert.FromBase64String(document.Value);
+            }
+
+            return result;
+        }
+
 
     }
 }
