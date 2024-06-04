@@ -19,7 +19,7 @@ namespace Integra.WebApi.Controllers.ContentCapture.Validation
                 .WithMessage("Отсутствует параметр \"Станция сканирования\"");
 
             RuleFor(batch => batch.RegistrationParameters)
-                .Must(parameters => parameters.ContainsKey("Сканировщик*"))
+                .Must(parameters => parameters.ContainsKey("Сканировщик"))
                 .WithMessage("Отсутствует параметр \"Сканировщик\"");
 
             

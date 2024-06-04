@@ -18,7 +18,7 @@ namespace Integra.Persistence.ContentCapture.Web
         private int RoleTypeId = 12; // External user (see API documentation)
         private int StationTypeId = 10; // External station (see API documentation)
 
-        private int ProjectId { get; set; }
+        //private int ProjectId { get; set; }
 
         public int External_OpenSession()
         {
@@ -50,7 +50,7 @@ namespace Integra.Persistence.ContentCapture.Web
             {
                 int sessionId = External_OpenSession();
 
-                int batchId = _api.AddNewBatch(sessionId, ProjectId, ccbatch, batchDto.OwnerId);
+                int batchId = _api.AddNewBatch(sessionId, batchDto.ProjectId, ccbatch, batchDto.OwnerId);
                 if (batchId <= 0) throw new Exception($"Couldn't create the batch {ccbatch.Name}");
 
                 _api.OpenBatch(sessionId, batchId);
@@ -95,7 +95,7 @@ namespace Integra.Persistence.ContentCapture.Web
 
         public BatchManager(IOptions<ContentCaptureApiSettings> settings) : base(settings)
         {
-            ProjectId = _settings.ProjectId;
+            //ProjectId = _settings.ProjectId;
         }
 
     }
