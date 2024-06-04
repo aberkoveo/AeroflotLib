@@ -1,12 +1,12 @@
 {
   "profiles": {
-    "Integra.Application": {
+    "Integra.Persistence": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "https://localhost:55842;http://localhost:55843"
+      "applicationUrl": "https://localhost:65406;http://localhost:65407"
     }
   }
 }
