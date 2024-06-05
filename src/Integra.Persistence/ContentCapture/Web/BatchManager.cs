@@ -4,8 +4,9 @@ using Integra.Domain.ContentCapture;
 using ContentCaptureApi;
 using Integra.Persistence.FileSystem;
 using Integra.Persistence.Utils;
-
-
+using Integra.Persistence.ContentCapture;
+using System.Reflection.Metadata;
+using Document = ContentCaptureApi.Document;
 namespace Integra.Persistence.ContentCapture.Web
 {
 
@@ -15,8 +16,8 @@ namespace Integra.Persistence.ContentCapture.Web
     /// </summary>
     public class BatchManager : ApplicationApi, IBatchManager
     {
-        private int RoleTypeId = 12; // External user (see API documentation)
-        private int StationTypeId = 10; // External station (see API documentation)
+        private readonly int RoleTypeId = 12; // External user (see API documentation)
+        private readonly int StationTypeId = 10; // External station (see API documentation)
 
         //private int ProjectId { get; set; }
 
@@ -106,6 +107,13 @@ namespace Integra.Persistence.ContentCapture.Web
 
                 _api.OpenBatch(sessionId, batchId);
 
+                //Добавляем страницу разделитель (пустой лист А4) - бизнес-требование
+                var separator = new EmptyPageBase64();
+                var separatordDocument = new Document { BatchId = batchId };
+                var id = await _api
+                    .AddNewDocumentAsync(sessionId, separatordDocument, separator.SeparatorDocument, false, -1);
+
+                //Добавляем вложения самих документов из BASE64
                 var batchBytes = await FilesReader.ReadFromBase64Async(batchDto.Base64DocumentFiles);
 
                 foreach (KeyValuePair<string, byte[]> item in batchBytes)
