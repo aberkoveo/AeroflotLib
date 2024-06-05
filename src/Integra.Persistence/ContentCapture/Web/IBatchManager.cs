@@ -10,4 +10,6 @@ namespace Integra.Persistence.ContentCapture.Web;
 public interface IBatchManager
 {
     Task<int> HandleBatchAsync(ContentBatch contentBatch);
+
+    Task<int> HandleBatchBase64Async(ContentBatch contentBatch);
 }

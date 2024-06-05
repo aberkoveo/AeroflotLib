@@ -13,7 +13,7 @@ namespace Integra.WebApi.Controllers.ContentCapture.Validation
             RuleFor(batch => batch.Name).NotEmpty();
             RuleFor(batch => batch.OwnerId).NotEmpty();
             RuleFor(batch => batch.RegistrationParameters).NotNull();
-
+            
             RuleFor(batch => batch.RegistrationParameters)
                 .Must(parameters => parameters.ContainsKey("Станция сканирования"))
                 .WithMessage("Отсутствует параметр \"Станция сканирования\"");
@@ -22,9 +22,18 @@ namespace Integra.WebApi.Controllers.ContentCapture.Validation
                 .Must(parameters => parameters.ContainsKey("Сканировщик"))
                 .WithMessage("Отсутствует параметр \"Сканировщик\"");
 
-            
-
-
         }
     }
+
+    public class ContentBatchBase64Validator : ContentBatchValidator
+    {
+        public ContentBatchBase64Validator()
+        {
+            RuleFor(batch => batch.Base64DocumentFiles)
+                .NotNull()
+                .WithMessage("Отсутствут вложения документов в BASE64"); ;
+        }
+    }
+
+
 }

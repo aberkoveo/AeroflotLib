@@ -22,5 +22,7 @@ namespace Integra.Domain.ContentCapture
         public int OwnerId { get; set; }
 
         public Dictionary<string, string> RegistrationParameters { get; set; }
+
+        public Dictionary<string, string> Base64DocumentFiles { get; set; }
     }
 }
