@@ -220,7 +220,7 @@ namespace zfmabbyy
             }
             //System.Console.WriteLine(s);
             //Making Web Request  
-            HttpWebRequest Req = (HttpWebRequest)WebRequest.Create(@"http://erp-ci.msk.aeroflot.ru:8002/sap/bc/srt/rfc/sap/zfm_abbyy_process/300/zfm_abbyy_process/zfm_abbyy_process?MessageId=" + messageID);
+            HttpWebRequest Req = (HttpWebRequest)WebRequest.Create(@"http://erp-pp1.msk.aeroflot.ru:8052/sap/bc/srt/rfc/sap/zfm_abbyy_process/300/zfm_abbyy_process/zfm_abbyy_process?MessageId=" + messageID);
             //SOAPAction  
             Req.Headers.Add(@"urn:sap-com:document:sap:rfc:functions:ZFM_ABBYY_PROCESS:ZFM_ABBYY_PROCESSRequest");
             //Content_type  
