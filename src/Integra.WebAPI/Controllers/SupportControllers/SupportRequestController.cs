@@ -14,6 +14,7 @@ using Integra.Persistence.Utils;
 
 namespace Integra.WebApi.Controllers.SupportControllers;
 
+[ApiVersionNeutral]
 [Route("api/[controller]")]
 public class SupportRequestController : BaseController
 {
