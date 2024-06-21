@@ -11,121 +11,6 @@ namespace zfmabbyy
         {
             ZFM_ABBYY_PROCESS obj = new ZFM_ABBYY_PROCESS();
 
-            //Console.WriteLine(Tools.formatDate("2019/09/05"));
-            //Console.ReadKey();
-
-            /*StringWriter sw = new StringWriter();
-            XmlTextWriter xtw = new XmlTextWriter(sw);
-
-            int n = 1;  //кол-во items в FL_SERV_ITEMS
-            int m = 1;  //кол-во items в ITEMS
-
-            xtw.WriteStartElement("soapenv:Envelope");
-            xtw.WriteAttributeString("xmlns", "soapenv", null, "http://schemas.xmlsoap.org/soap/envelope/");
-            xtw.WriteAttributeString("xmlns", "urn", null, "urn:sap-com:document:sap:rfc:functions");
-            xtw.WriteStartElement("Header", "http://schemas.xmlsoap.org/soap/envelope/");
-            xtw.WriteEndElement();  //close Header
-            xtw.WriteStartElement("Body", "http://schemas.xmlsoap.org/soap/envelope/");
-            xtw.WriteStartElement("ZFM_ABBYY_PROCESS", "urn:sap-com:document:sap:rfc:functions");
-            xtw.WriteStartElement("IS_DATA");
-            xtw.WriteElementString("PROC_TYPE", "90");
-            xtw.WriteStartElement("VEND_CODE_IN");
-            xtw.WriteElementString("INN", "1660000344");
-            xtw.WriteElementString("KPP", "");
-            xtw.WriteElementString("BIC_SWIFT", "");
-            xtw.WriteElementString("BANKN", "");
-            xtw.WriteElementString("IBAN", "");
-            xtw.WriteElementString("NAME", "");
-            xtw.WriteElementString("PARTNER", "");
-            xtw.WriteElementString("ACCOUNT_ID", "");
-            xtw.WriteElementString("EXT_AGR_NUM", "");
-            xtw.WriteElementString("KDOKNR", "");
-            xtw.WriteEndElement();  //close VEND_CODE_IN
-            xtw.WriteStartElement("HEADER_DATA");
-            xtw.WriteElementString("PACK", "");
-            xtw.WriteElementString("ID", "");
-            xtw.WriteElementString("PROCESS_TYPE", "");
-            xtw.WriteElementString("DOCNUM", "");
-            xtw.WriteElementString("DOCDATE", "");
-            xtw.WriteElementString("CRED_NAME", "");
-            xtw.WriteElementString("CRED_ADDR", "");
-            xtw.WriteElementString("CRED_INN", "");
-            xtw.WriteElementString("CRED_KPP", "");
-            xtw.WriteElementString("CRED_SWIFT", "");
-            xtw.WriteElementString("CRED_IBAN", "");
-            xtw.WriteElementString("CRED_CORR", "");
-            xtw.WriteElementString("CRED_BANK", "");
-            xtw.WriteElementString("CUST_NAME", "");
-            xtw.WriteElementString("CUST_ADDR", "");
-            xtw.WriteElementString("CUST_INN", "");
-            xtw.WriteElementString("CUST_KPP", "");
-            xtw.WriteElementString("LINK_DOC", "");
-            xtw.WriteElementString("CONTRACT", "");
-            xtw.WriteElementString("CONSIGNOR", "");
-            xtw.WriteElementString("CONSIGNEE", "");
-            xtw.WriteElementString("DUE_DATE", "");
-            xtw.WriteElementString("TOTAL", "");
-            xtw.WriteElementString("VAT", "");
-            xtw.WriteElementString("TOTAL_INCL_VAT", "");
-            xtw.WriteElementString("CURRENCY", "");
-            xtw.WriteElementString("SOURCE_DOC", "");
-            xtw.WriteElementString("ZZ_SERV_DATE_FROM", "");
-            xtw.WriteElementString("ZZ_SERV_DATE_TO", "");
-            xtw.WriteElementString("SCAN_STATION", "");
-            xtw.WriteElementString("SCAN_NAME", "");
-            xtw.WriteElementString("SCAN_DATE", "");
-            xtw.WriteElementString("SCAN_TIME", "");
-            xtw.WriteElementString("CONTR_NAME", "");
-            xtw.WriteElementString("LIFNR", "");
-            xtw.WriteElementString("ZUONR", "");
-            xtw.WriteEndElement();  //close HEADER_DATA
-            xtw.WriteStartElement("ITEM_DATA");
-            for (int i = 0; i < n; i++)
-            {
-                xtw.WriteStartElement("item");
-                xtw.WriteElementString("PACK", "");
-                xtw.WriteElementString("ID", "");
-                xtw.WriteElementString("SERV_DATE", "");
-                xtw.WriteElementString("SERV_TIME", "");
-                xtw.WriteElementString("FLIGHT_NUM", "");
-                xtw.WriteElementString("TAIL_NUM", "");
-                xtw.WriteElementString("AC_TYPE", "");
-                xtw.WriteStartElement("FLIGHT_SERV_ITEMS");
-                xtw.WriteStartElement("item");
-                for (int j = 0; j < m; j++)
-                {
-                    xtw.WriteStartElement("item");
-                    xtw.WriteElementString("PACK", "");
-                    xtw.WriteElementString("ID", "");
-                    xtw.WriteElementString("DESCRIPTION", "");
-                    xtw.WriteElementString("COEFF", "");
-                    xtw.WriteElementString("UOM", "");
-                    xtw.WriteElementString("QUANTITY", "");
-                    xtw.WriteElementString("PRICE", "");
-                    xtw.WriteElementString("DISCOUNT", "");
-                    xtw.WriteElementString("TOTAL_WO_VAT", "");
-                    xtw.WriteElementString("VAT", "");
-                    xtw.WriteElementString("TOTAL_W_VAT", "");
-                    xtw.WriteElementString("NOTE", "");
-                    xtw.WriteEndElement();  //close item
-                }
-                xtw.WriteEndElement();  //close item
-                xtw.WriteEndElement();  //close FLIGHT_SERV_ITEMS
-                xtw.WriteEndElement();  //close item
-            }
-            xtw.WriteEndElement();  //close FL_SERV_ITEMS
-            xtw.WriteEndElement();  //close IS_DATA
-            xtw.WriteEndElement();  //close ZFM_ABBYY_PROCESS
-            xtw.WriteEndElement();  //close Body
-            xtw.WriteEndElement();  //close Envelope
-
-            
-
-            string s = sw.ToString();
-            xtw.Close();
-            sw.Close();*/
-            //Console.Out.WriteLine(s);
-            //Console.ReadLine();
             
             string s1 = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:sap-com:document:sap:rfc:functions\"><soapenv:Header /><soapenv:Body><urn:ZFM_ABBYY_PROCESS><IS_DATA><PROC_TYPE>90</PROC_TYPE><VEND_CODE_IN><INN>1660000344</INN><KPP>162401001</KPP><NAME>АО «Международный аэропорт «Казань»</NAME><BIC_SWIFT /><BANKN /></VEND_CODE_IN></IS_DATA></urn:ZFM_ABBYY_PROCESS></soapenv:Body></soapenv:Envelope>";
 
@@ -134,22 +19,6 @@ namespace zfmabbyy
 
             return;
 
-           /* xDoc.SelectSingleNode("//BELNR");
-            xDoc.SelectSingleNode("//GJAHR");
-            xDoc.SelectSingleNode("//INN");
-            xDoc.SelectSingleNode("//KPP");
-            xDoc.SelectSingleNode("//BIC_SWIFT");
-            xDoc.SelectSingleNode("//BANKN");
-            xDoc.SelectSingleNode("//IBAN");
-            xDoc.SelectSingleNode("//NAME");
-            s1=xDoc.SelectSingleNode("//LIFNR").InnerText;
-            xDoc.SelectSingleNode("//AGR_NUM");
-            xDoc.SelectSingleNode("//FLAG");
-            //System.Console.WriteLine(xDoc.SelectSingleNode("//BELNR").InnerText);
-
-
-            //Console.WriteLine("s1:"+s1);
-            Console.ReadLine();*/
 
         }
         public XmlDocument InvokeService(string s)
@@ -182,8 +51,6 @@ namespace zfmabbyy
                         xDoc.LoadXml(ServiceResult);
                         return xDoc;
 
-                        //XmlNode xNode = xDoc.SelectSingleNode("//E_PARTNER");
-                        //System.Console.WriteLine(xNode);
                     }
                 }
             }
@@ -218,9 +85,8 @@ namespace zfmabbyy
                     messageID += getRand(rnd);
                 }
             }
-            //System.Console.WriteLine(s);
             //Making Web Request  
-            HttpWebRequest Req = (HttpWebRequest)WebRequest.Create(@"http://erp-pp1.msk.aeroflot.ru:8052/sap/bc/srt/rfc/sap/zfm_abbyy_process/300/zfm_abbyy_process/zfm_abbyy_process?MessageId=" + messageID);
+            HttpWebRequest Req = (HttpWebRequest)WebRequest.Create(@"http://172.16.41.176:8052/sap/bc/srt/rfc/sap/zfm_abbyy_process/300/zfm_abbyy_process/zfm_abbyy_process?MessageId=" + messageID);
             //SOAPAction  
             Req.Headers.Add(@"urn:sap-com:document:sap:rfc:functions:ZFM_ABBYY_PROCESS:ZFM_ABBYY_PROCESSRequest");
             //Content_type  
