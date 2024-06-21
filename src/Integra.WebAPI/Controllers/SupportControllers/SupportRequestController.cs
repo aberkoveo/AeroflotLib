@@ -14,6 +14,7 @@ using Integra.Persistence.Utils;
 
 namespace Integra.WebApi.Controllers.SupportControllers;
 
+[ApiVersionNeutral]
 [Route("api/[controller]")]
 public class SupportRequestController : BaseController
 {
@@ -84,7 +85,6 @@ public class SupportRequestController : BaseController
 
             if (id is null)
             {
-                _logger.Error("Bad request:\n" + JsonWriter.ConvertObject(request));
                 throw new Exception("Создание инцидента в Solman не выполнено! ID = null");
             }
 
