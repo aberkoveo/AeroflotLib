@@ -30,7 +30,7 @@ namespace zfmabbyy
             //SOAP Body Request  
             SOAPReqBody.LoadXml(s);
 
-            return null;
+            //return null;
 
             try
             {
