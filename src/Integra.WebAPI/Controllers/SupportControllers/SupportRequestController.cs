@@ -37,7 +37,9 @@ public class SupportRequestController : BaseController
     [HttpGet]
     public async Task<ActionResult<string>> Get()
     {
-        return Ok("Сервис интеграции c Solman для создания инцидентов");
+        string guid = await _incidentManager.GetGuidAsync();
+
+        return Ok($"Сервис интеграции c Solman для создания инцидентов\n{guid}");
     }
 
 

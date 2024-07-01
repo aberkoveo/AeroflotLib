@@ -11,5 +11,6 @@ namespace Integra.Persistence.Solman
     public interface IIncidentManager
     {
         Task<string> CreateIncidentAsync(SupportRequest request);
+        Task<string> GetGuidAsync();
     }
 }

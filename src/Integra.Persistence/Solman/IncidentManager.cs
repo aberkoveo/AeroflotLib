@@ -21,6 +21,10 @@ namespace Integra.Persistence.Solman
             {
                 RequestGuid request = new RequestGuid();
                 var result = await _api.RequestGuidAsync(request);
+                if (String.IsNullOrEmpty(result.RequestGuidResponse.Guid))
+                {
+                    throw new Exception("Cant get GUID from SolMan API..");
+                }
                 return result.RequestGuidResponse.Guid;
             }
             catch (Exception ex)

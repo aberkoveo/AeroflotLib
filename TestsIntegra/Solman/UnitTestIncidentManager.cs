@@ -21,9 +21,9 @@ namespace TestsIntegra.Solman
         {
             SolmanApiSettings settings = new SolmanApiSettings()
             {
-                ServiceUrl = "http://mlk-sm-02.msk.aeroflot.ru:8000",
-                ServiceUser = "INC_TEST",
-                ServicePassword = "@WSX2wsx"
+                ServiceUrl = "http://smp-ci.msk.aeroflot.ru:8888",
+                ServiceUser = "INTGPSKSM",
+                ServicePassword = "integration1234"
             };
 
             var optionsMock = new Mock<IOptions<SolmanApiSettings>>();
