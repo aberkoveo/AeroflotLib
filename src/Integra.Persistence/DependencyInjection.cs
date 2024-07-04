@@ -7,6 +7,7 @@ using Microsoft.Extensions.Options;
 using Integra.Persistence.FileSystem;
 using Integra.Persistence.ContentCapture.Web;
 using Integra.Persistence.Solman;
+using Integra.Persistence.Authentication;
 
 namespace Integra.Persistence;
 
@@ -26,6 +27,8 @@ public static class DependencyInjection
 
         services.AddScoped<IBatchManager, BatchManager>();
         services.AddScoped<IIncidentManager, IncidentManager>();
+
+        services.AddScoped<IUserRepository, UserRepository>();
 
         return services;
     }

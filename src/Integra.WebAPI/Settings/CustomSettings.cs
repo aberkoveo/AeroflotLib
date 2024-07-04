@@ -18,6 +18,9 @@ namespace Integra.WebAPI.Settings
             services.Configure<SolmanApiSettings>(configuration
                 .GetSection("SolmanApiSettings"));
 
+            services.Configure<AuthenticationSettings>(configuration
+                .GetSection("AuthenticationSettings"));
+
             return services;
         }
     }

@@ -35,6 +35,7 @@ public class SupportRequestController : BaseController
     /// </summary>
     /// <returns></returns>
     [HttpGet]
+    [Authorize]
     public async Task<ActionResult<string>> Get()
     {
         string guid = await _incidentManager.GetGuidAsync();
@@ -49,6 +50,7 @@ public class SupportRequestController : BaseController
     /// <param name="createSupportRequestDto"></param>
     /// <returns>Внутренний для таблицы ID инцидента, автоинкремент</returns>
     [HttpPost]
+    [Authorize]
     public async Task<ActionResult<int>> Create([FromBody] CreateSupportRequestDto createSupportRequestDto)
     {
         _logger.Info($"Создание записи по инциденту {createSupportRequestDto.SMID}");
@@ -76,6 +78,7 @@ public class SupportRequestController : BaseController
     /// <returns>Идентификатор инцидента в Solution Manager</returns>
     [HttpPost]
     [Route("[action]")]
+    [Authorize]
     public async Task<ActionResult<int>> CreateIncident([FromBody] SupportRequest request)
     {
         _logger.Info($"Запрос создания инцидента по пакету c ID={request.BatchId}");
