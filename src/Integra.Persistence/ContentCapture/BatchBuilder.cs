@@ -25,7 +25,7 @@ namespace Integra.Persistence.ContentCapture
             {
                 Name = dto.Name,
                 ProjectId = dto.ProjectId,
-                OwnerId = dto.OwnerId,
+                OwnerId = 0,
                 BatchTypeId = dto.BatchTypeId,
             };
 
