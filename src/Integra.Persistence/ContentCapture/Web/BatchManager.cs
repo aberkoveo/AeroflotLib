@@ -51,7 +51,7 @@ namespace Integra.Persistence.ContentCapture.Web
             {
                 int sessionId = External_OpenSession();
 
-                int batchId = _api.AddNewBatch(sessionId, batchDto.ProjectId, ccbatch, batchDto.OwnerId);
+                int batchId = _api.AddNewBatch(sessionId, batchDto.ProjectId, ccbatch, 0);
                 if (batchId <= 0) throw new Exception($"Couldn't create the batch {ccbatch.Name}");
 
                 _api.OpenBatch(sessionId, batchId);
@@ -102,7 +102,7 @@ namespace Integra.Persistence.ContentCapture.Web
             {
                 int sessionId = External_OpenSession();
 
-                int batchId = _api.AddNewBatch(sessionId, batchDto.ProjectId, ccbatch, batchDto.OwnerId);
+                int batchId = _api.AddNewBatch(sessionId, batchDto.ProjectId, ccbatch, 0);
                 if (batchId <= 0) throw new Exception($"Couldn't create the batch {ccbatch.Name}");
 
                 _api.OpenBatch(sessionId, batchId);
