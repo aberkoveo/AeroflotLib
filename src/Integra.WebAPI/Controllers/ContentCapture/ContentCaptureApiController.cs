@@ -105,7 +105,7 @@ public class ContentCaptureApiController : ControllerBase
     public async Task<ActionResult<int>> HandleBatchV2([FromBody] ContentBatch batch)
     {
         _logger.Info($"Получен запрос на обработку пакета {batch.Name}.");
-        //_logger.Debug(JsonWriter.ConvertObject(batch));
+        _logger.Trace($"Запрос от SAP:\n{JsonWriter.ConvertObject(batch)}");
 
 
         //Валидация входных данных

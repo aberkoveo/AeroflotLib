@@ -7,6 +7,8 @@ using Integra.Persistence.Utils;
 using Integra.Persistence.ContentCapture;
 using System.Reflection.Metadata;
 using Document = ContentCaptureApi.Document;
+using Azure.Core;
+
 namespace Integra.Persistence.ContentCapture.Web
 {
 
