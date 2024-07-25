@@ -39,7 +39,7 @@ namespace AeroflotLib.Processing.ExportSap
             string requestBody = RequestBodyBuilder.BuildBody(bodyParameters);
 
             //логируем тело запроса В САП
-            _logger.Debug("Request to SAP body: \n" + requestBody);
+            _logger.Trace("Request to SAP body: \n" + requestBody);
 
             XmlDocument xmlBody = new XmlDocument();
             xmlBody.LoadXml(requestBody);
@@ -70,7 +70,7 @@ namespace AeroflotLib.Processing.ExportSap
                         //логируем тело ответа ИЗ САПА
                         _logger.Debug("SAP answer body: \n" + xmlDocument.OuterXml);
 
-                        _logger.Info(xmlNode.InnerText);
+                        //_logger.Info(xmlNode.InnerText);
                     }
                 }
             }
