@@ -7,9 +7,12 @@ using NLog;
 using NLog.Web;
 using Integra.WebAPI.Settings;
 using FluentValidation;
-using FluentValidation.AspNetCore;
 using Integra.WebApi.Controllers.ContentCapture.Validation;
 using Integra.Domain.ContentCapture;
+using AspNetCoreRateLimit;
+
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 var logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
 logger.Info("Запуск сервиса интеграции");
@@ -40,6 +43,32 @@ try
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
 
+    builder.Services.AddAuthorization();
+    builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = false,
+            ValidIssuer = AuthOptions.ISSUER,
+            ValidateAudience = false,
+            ValidAudience = AuthOptions.AUDIENCE,
+            ValidateLifetime = false,
+            IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
+            ValidateIssuerSigningKey = true
+        };
+
+    });
+    #region RateLimit
+    builder.Services.AddMemoryCache();
+    builder.Services.Configure<IpRateLimitOptions>(builder.Configuration.GetSection("IpRateLimiting"));
+    builder.Services.AddSingleton<IIpPolicyStore, MemoryCacheIpPolicyStore>();
+    builder.Services.AddSingleton<IRateLimitCounterStore, MemoryCacheRateLimitCounterStore>();
+    builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
+    builder.Services.AddSingleton<IProcessingStrategy, AsyncKeyLockProcessingStrategy>();
+    builder.Services.AddInMemoryRateLimiting();
+    #endregion RateLimit
+
     var app = builder.Build();
 
     if (app.Environment.IsDevelopment())
@@ -48,7 +77,9 @@ try
         app.UseSwaggerUI();
     }
 
-
+    app.UseDefaultFiles();
+    app.UseStaticFiles();
+    app.UseAuthentication();
     app.UseAuthorization();
     app.MapControllers();
     app.Run();
